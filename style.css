@@ -1631,3 +1631,539 @@ select:focus {
 .tour-btn:active {
   transform: translateY(0);
 }
+
+/* =======================================
+   RESPONSIVE DESIGN
+   Base size: 1360x768
+   ======================================= */
+
+/* Base responsive font scaling */
+html {
+    font-size: 16px; /* Base font size for 1360px */
+}
+
+/* Default - for screens larger than 1360px */
+@media (min-width: 1361px) {
+    html {
+        font-size: calc(16px + (100vw - 1360px) * 0.002);
+    }
+    
+    /* Scale down hotspots slightly for very large screens */
+    .hotspot {
+        width: 3.8%;
+        height: 0.95%;
+    }
+}
+
+/* Large Tablets and Small Laptops (1024px to 1360px) */
+@media (max-width: 1360px) and (min-width: 1025px) {
+    html {
+        font-size: 15px;
+    }
+    
+    /* Scale hotspots proportionally */
+    .hotspot {
+        width: 3.6%;
+        height: 0.9%;
+    }
+    
+    /* Scale quest box */
+    #quest-box {
+        max-width: 800px;
+        padding: 12px;
+        gap: 8px;
+    }
+    
+    /* Scale profile popup */
+    .popup {
+        max-width: 1000px;
+        padding: 20px;
+    }
+    
+    /* Scale welcome scroll */
+    .welcome-scroll {
+        width: 80%;
+        max-width: 800px;
+        padding: 70px 50px;
+    }
+    
+    /* Adjust dropdown positioning */
+    #dropdown-container {
+        top: 15px;
+        left: 15px;
+        padding: 8px;
+    }
+}
+
+/* Tablets (768px to 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+    html {
+        font-size: 14px;
+    }
+    
+    /* Scale hotspots */
+    .hotspot {
+        width: 3.4%;
+        height: 0.85%;
+    }
+    
+    /* Adjust quest box layout */
+    #quest-box {
+        max-width: 700px;
+        padding: 10px;
+        gap: 6px;
+        grid-template-columns: repeat(10, 1fr);
+    }
+    
+    /* Adjust quest row layouts */
+    #quest-box > .quest-row:nth-of-type(1),
+    #quest-box > .quest-row:nth-of-type(2) {
+        grid-template-columns: 4fr 2fr 2fr;
+    }
+    
+    /* Adjust cell spans */
+    .quest-cell.full { grid-column: 1 / 5; }
+    .image-cell { grid-column: 1 / 3; }
+    .description-cell { grid-column: 3 / 7; }
+    .requirements-cell { grid-column: 7 / 11; }
+    .links-cell { grid-column: 1 / 5; }
+    .reward-cell { grid-column: 5 / 11; }
+    
+    /* Scale profile popup */
+    .popup {
+        max-width: 900px;
+        padding: 18px;
+    }
+    
+    .profile-grid {
+        grid-template-columns: 1fr 1.5fr 1fr;
+        gap: 18px;
+    }
+    
+    /* Scale welcome scroll */
+    .welcome-scroll {
+        width: 85%;
+        max-width: 700px;
+        padding: 60px 40px;
+    }
+    
+    /* Adjust dropdown container */
+    #dropdown-container {
+        top: 10px;
+        left: 10px;
+        padding: 6px;
+    }
+    
+    #quest-search-container {
+        width: 180px;
+    }
+    
+    /* Scale buttons */
+    .profile-btn img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .achievements-btn {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile Landscape / Small Tablets (600px to 768px) */
+@media (max-width: 768px) and (min-width: 601px) {
+    html {
+        font-size: 13px;
+    }
+    
+    /* Scale hotspots */
+    .hotspot {
+        width: 3.2%;
+        height: 0.8%;
+    }
+    
+    /* Simplify quest box layout */
+    #quest-box {
+        max-width: 90%;
+        padding: 8px;
+        gap: 5px;
+        grid-template-columns: repeat(8, 1fr);
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    /* Single column layout for quest content */
+    #quest-box > .quest-row {
+        display: flex;
+        flex-direction: column;
+        grid-column: 1 / -1;
+        gap: 5px;
+    }
+    
+    .quest-cell {
+        grid-column: 1 / -1 !important;
+        margin-bottom: 5px;
+    }
+    
+    /* Stack header rows */
+    #quest-box > .quest-row:nth-of-type(1),
+    #quest-box > .quest-row:nth-of-type(2) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    #quest-box > .quest-row:nth-of-type(1) .quest-cell,
+    #quest-box > .quest-row:nth-of-type(2) .quest-cell {
+        flex: 1;
+        min-width: 30%;
+        margin: 2px;
+    }
+    
+    /* Profile popup adjustments */
+    .popup {
+        max-width: 95%;
+        padding: 15px;
+    }
+    
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .profile-center, .profile-right {
+        grid-column: 1;
+    }
+    
+    /* Welcome scroll adjustments */
+    .welcome-scroll {
+        width: 90%;
+        max-width: 600px;
+        padding: 50px 30px;
+    }
+    
+    .scroll-body {
+        max-height: 50vh;
+    }
+    
+    /* Adjust top controls */
+    #dropdown-container {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0,30,180,0.5);
+        border-radius: 0;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    #quest-search-container {
+        width: 200px;
+        margin: 5px;
+    }
+    
+    /* Reposition buttons */
+    .profile-btn {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .profile-btn img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .achievements-btn {
+        bottom: 10px;
+        right: 10px;
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+    
+    /* Welcome tour adjustments */
+    #welcome-tour-talk-bubble {
+        max-width: 80%;
+        padding: 20px;
+    }
+    
+    #welcome-tour-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #welcome-tour-controls button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+
+/* Mobile Portrait (up to 600px) */
+@media (max-width: 600px) {
+    html {
+        font-size: 12px;
+    }
+    
+    /* Scale hotspots - keep visible but smaller */
+    .hotspot {
+        width: 3%;
+        height: 0.75%;
+    }
+    
+    /* Very simple quest layout */
+    #quest-box {
+        max-width: 95%;
+        padding: 6px;
+        gap: 4px;
+        grid-template-columns: 1fr;
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+    
+    /* Single column everything */
+    .quest-row {
+        display: block;
+    }
+    
+    .quest-cell {
+        display: block;
+        width: 100%;
+        margin-bottom: 5px;
+        grid-column: 1 !important;
+    }
+    
+    /* Stack header elements */
+    #quest-box > .quest-row:nth-of-type(1),
+    #quest-box > .quest-row:nth-of-type(2) {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Profile popup - single column */
+    .popup {
+        max-width: 98%;
+        padding: 12px;
+    }
+    
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    #radar-chart-container {
+        height: 250px;
+    }
+    
+    #standards-table {
+        font-size: 11px;
+    }
+    
+    /* Welcome scroll */
+    .welcome-scroll {
+        width: 95%;
+        padding: 40px 20px;
+    }
+    
+    .scroll-body {
+        max-height: 40vh;
+        padding: 10px;
+    }
+    
+    /* Top controls - stacked */
+    #dropdown-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 8px;
+        gap: 8px;
+    }
+    
+    select {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    #quest-search-container {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    /* Reposition buttons */
+    .profile-btn {
+        top: 5px;
+        right: 5px;
+    }
+    
+    .profile-btn img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .achievements-btn {
+        bottom: 5px;
+        right: 5px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    /* Welcome tour - simplified */
+    #welcome-tour-talk-bubble {
+        max-width: 90%;
+        padding: 15px;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    #welcome-tour-image-wrapper {
+        display: none; /* Hide image on very small screens */
+    }
+    
+    #welcome-tour-controls {
+        flex-direction: column;
+    }
+    
+    #welcome-tour-controls button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+
+/* Very small phones (up to 400px) */
+@media (max-width: 400px) {
+    html {
+        font-size: 11px;
+    }
+    
+    /* Make hotspots slightly larger for touch */
+    .hotspot {
+        width: 4%;
+        height: 1%;
+    }
+    
+    /* Reduce padding everywhere */
+    #quest-box {
+        padding: 4px;
+        gap: 3px;
+    }
+    
+    .quest-cell {
+        padding: 6px;
+        margin-bottom: 3px;
+    }
+    
+    /* Hide some less critical elements */
+    .scroll-top, .scroll-bottom {
+        display: none;
+    }
+    
+    .welcome-scroll {
+        padding: 30px 15px;
+    }
+    
+    /* Simplify dropdown */
+    #path-selector, #mvp-quests {
+        font-size: 10px;
+    }
+}
+
+/* High DPI screens adjustments */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Ensure sharp borders and text */
+    .hotspot.debug {
+        border: 1px solid rgba(255, 0, 0, 0.1);
+    }
+    
+    #quest-box,
+    .popup,
+    .welcome-scroll {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
+    }
+}
+
+/* Orientation-specific adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+    /* For landscape mobile with short height */
+    #quest-box {
+        max-height: 80vh;
+    }
+    
+    .scroll-body {
+        max-height: 40vh;
+    }
+    
+    .profile-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .profile-left {
+        grid-column: 1;
+    }
+    
+    .profile-center {
+        grid-column: 2;
+    }
+    
+    .profile-right {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Print styles (optional) */
+@media print {
+    #dropdown-container,
+    .profile-btn,
+    .achievements-btn,
+    #welcome-tour-container,
+    .hotspot {
+        display: none !important;
+    }
+    
+    #map-image {
+        filter: grayscale(100%);
+    }
+}
+
+/* Prevent text selection on interactive elements */
+#dropdown-container,
+.hotspot,
+.quest-cell,
+.tab-button,
+.profile-btn,
+.achievements-btn,
+#welcome-tour-controls button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Smooth scaling transitions */
+#map-container,
+#quest-box,
+.popup,
+.welcome-scroll {
+    transition: all 0.3s ease;
+}
+
+/* Ensure map image scales properly */
+#map-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Fix for iOS Safari viewport height */
+@supports (-webkit-touch-callout: none) {
+    #quest-overlay,
+    .welcome-overlay,
+    .overlay {
+        height: -webkit-fill-available;
+    }
+}
+
