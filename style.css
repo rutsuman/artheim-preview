@@ -421,7 +421,7 @@ select:focus {
         box-shadow: 0px 0px 40px rgb(255, 1, 1);
     }
 }
-/* WELCOME==========================================================================================*/
+/* WELCOME OVERLAY */
 .welcome-overlay {
   position: fixed;
   top: 0;
@@ -436,35 +436,41 @@ select:focus {
   box-sizing: border-box;
 }
 
-/* Scroll wrapper with preserved aspect ratio */
+/* Scroll wrapper */
 .welcome-scroll {
   position: relative;
   width: 80%;
-  max-width: 600px;          /* adjust based on your scroll image */
-  aspect-ratio: 3/4;         /* match your scroll image ratio */
+  max-width: 600px;
+  aspect-ratio: 3/4;               /* adjust to match your scroll image */
   background: url('scroll.png') center/contain no-repeat;
-  display: flex;
-  justify-content: center;   /* horizontally center inner content */
-  align-items: center;       /* vertically center inner content */
   box-shadow: 0 25px 60px rgba(0,0,0,0.7);
   animation: float 5s ease-in-out infinite;
   box-sizing: border-box;
-  padding: 0;                /* no padding here */
-  overflow: hidden;
+  padding: 0;
 }
 
-/* Inner container defining the actual writing area */
+/* Decorative top and bottom (optional) */
+.scroll-top,
+.scroll-bottom {
+  width: 100%;
+  height: 5%; /* adjust based on scroll decoration */
+}
+
+/* Inner writing area absolutely positioned for perfect fit */
 .scroll-inner {
-  width: 80%;                /* width relative to scroll image */
-  height: 70%;               /* height relative to scroll image, adjust for top/bottom edges */
+  position: absolute;
+  top: 10%;        /* leave space at the top */
+  bottom: 10%;     /* leave space at the bottom */
+  left: 10%;       /* leave space on left */
+  right: 10%;      /* leave space on right */
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* vertically center short text */
-  overflow-y: auto;          /* scroll if text too long */
-  padding: clamp(10px, 2vw, 30px); /* internal padding inside writing area */
+  justify-content: center; /* vertically center short text */
+  overflow-y: auto;        /* scroll if text is too long */
+  padding: 10px 0;         /* inner padding inside writing area */
   box-sizing: border-box;
   text-align: center;
-  color: #000000;
+  color: #000;
   font-family: 'Georgia', serif;
   font-size: clamp(14px, 2vw, 20px);
   line-height: 1.6;
@@ -486,17 +492,17 @@ select:focus {
   100% { transform: translateY(-4px); }
 }
 
-/* Text styling */
+/* Text */
 .scroll-inner h1 {
   font-size: clamp(22px, 3.5vw, 42px);
   margin-bottom: 15px;
 }
 .scroll-inner p {
   font-size: clamp(12px, 1.6vw, 18px);
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-/* Button styling */
+/* Button */
 #welcome-close {
   padding: 10px 20px;
   font-size: clamp(14px, 2vw, 18px);
@@ -528,6 +534,7 @@ select:focus {
   height: clamp(60px, 10vw, 90px);
   object-fit: contain;
 }
+
 
 
 /* ==========================
@@ -2022,6 +2029,7 @@ select:focus {
     background: white !important;
   }
 }
+
 
 
 
