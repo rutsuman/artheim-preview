@@ -422,47 +422,80 @@ select:focus {
     }
 }
 /* WELCOME OVERLAY =============================================*/
+/* OVERLAY */
+.welcome-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+}
+
+/* SCROLL */
 .welcome-scroll {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 80%;
   max-width: 600px;
   aspect-ratio: 3/4;
   background: url('scroll.png') center/contain no-repeat;
+  background-size: contain;
   box-shadow: 0 25px 60px rgba(0,0,0,0.7);
-  animation: float 5s ease-in-out infinite;
+  padding: 10px;
   box-sizing: border-box;
+  animation: float 5s ease-in-out infinite;
 }
 
-/* SCROLL INNER: absolutely positioned inside scroll */
-.scroll-inner {
-  position: absolute;
-  top: 10%;
-  bottom: 10%;
-  left: 6%;
-  right: 6%;
+/* FLOAT */
+@keyframes float {
+  0% { transform: translateY(-4px); }
+  50% { transform: translateY(4px); }
+  100% { transform: translateY(-4px); }
+}
+
+/* SCROLL CONTENT */
+.scroll-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   overflow-y: auto;
-  padding: 5px 0;
+  width: 90%;
+  height: 100%;
+  padding: 10px 0;
   box-sizing: border-box;
   text-align: center;
   gap: 10px;
 }
 
-/* HEADINGS AND PARAGRAPHS */
-.scroll-inner h1 {
+/* HEADINGS & PARAGRAPHS */
+.scroll-content h1 {
   font-size: clamp(22px, 3vw, 36px);
   margin-bottom: 10px;
 }
-.scroll-inner p {
+.scroll-content p {
   font-size: clamp(14px, 2vw, 20px);
   line-height: 1.5;
   margin-bottom: 8px;
 }
 
-/* NAME INPUT SECTION */
+/* BUTTONS */
+.scroll-content button {
+  padding: 8px 16px;
+  font-size: 16px;
+  border: 2px solid #7b5a2b;
+  background: #f0d9a7;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* NAME INPUT */
 .name-input-section {
   display: flex;
   flex-direction: column;
@@ -473,7 +506,8 @@ select:focus {
 .name-input-section input {
   padding: 8px 12px;
   font-size: 16px;
-  width: clamp(150px, 50%, 250px);
+  width: 80%;
+  max-width: 250px;
   border: 2px solid #7b5a2b;
   border-radius: 8px;
   box-sizing: border-box;
@@ -495,8 +529,6 @@ select:focus {
   gap: 10px;
   margin-top: 10px;
 }
-
-/* CHARACTER CARDS */
 .character-card {
   cursor: pointer;
   border: 2px solid rgba(255,255,255,0.3);
@@ -505,11 +537,32 @@ select:focus {
   flex: 0 0 auto;
 }
 .character-card img {
-  width: clamp(60px, 20vw, 90px);
+  width: clamp(60px, 20%, 90px);
   height: auto;
   object-fit: contain;
 }
 
+/* SCROLL TOP & BOTTOM DECORATIONS */
+.scroll-top, .scroll-bottom {
+  width: 100%;
+  height: 5%;
+}
+
+/* RESPONSIVE SMALL SCREENS */
+@media (max-width: 480px) {
+  .welcome-scroll {
+    width: 95%;
+  }
+  .scroll-content h1 {
+    font-size: clamp(18px, 5vw, 24px);
+  }
+  .scroll-content p {
+    font-size: clamp(12px, 4vw, 16px);
+  }
+  .name-input-section input {
+    width: 90%;
+  }
+}
 
 
 
@@ -2005,6 +2058,7 @@ select:focus {
     background: white !important;
   }
 }
+
 
 
 
