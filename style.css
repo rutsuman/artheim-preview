@@ -450,6 +450,7 @@ select:focus {
   animation: float 5s ease-in-out infinite;
   box-sizing: border-box;
   padding: 0;                /* no padding here */
+  overflow: hidden;
 }
 
 /* Inner container defining the actual writing area */
@@ -2021,6 +2022,7 @@ select:focus {
     background: white !important;
   }
 }
+
 
 
 
