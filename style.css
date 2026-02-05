@@ -459,10 +459,10 @@ select:focus {
 /* Inner writing area absolutely positioned for perfect fit */
 .scroll-inner {
   position: absolute;
-  top: 35%;        /* leave space at the top */
-  bottom: 35%;     /* leave space at the bottom */
-  left: 3.5%;       /* leave space on left */
-  right: 5%;      /* leave space on right */
+  top: 25%;        /* leave space at the top */
+  bottom: 25%;     /* leave space at the bottom */
+  left: 5%;       /* leave space on left */
+  right: 4.5%;      /* leave space on right */
   display: flex;
   flex-direction: column;
   justify-content: center; /* vertically center short text */
@@ -2029,6 +2029,7 @@ select:focus {
     background: white !important;
   }
 }
+
 
 
 
