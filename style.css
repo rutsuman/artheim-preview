@@ -461,8 +461,8 @@ select:focus {
   position: absolute;
   top: 25%;        /* leave space at the top */
   bottom: 25%;     /* leave space at the bottom */
-  left: 5%;       /* leave space on left */
-  right: 4.5%;      /* leave space on right */
+  left: 6%;       /* leave space on left */
+  right: 5%;      /* leave space on right */
   display: flex;
   flex-direction: column;
   justify-content: center; /* vertically center short text */
@@ -2029,6 +2029,7 @@ select:focus {
     background: white !important;
   }
 }
+
 
 
 
