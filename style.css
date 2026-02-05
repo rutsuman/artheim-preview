@@ -393,7 +393,7 @@ select:focus {
 .welcome-scroll {
   box-sizing: border-box;
   position: relative;
-  width: 130%;
+  width: 100%;
   /*max-width: 1200px;*/
   height: 80vh;
   background: url('scroll.png') center/contain no-repeat;
@@ -1638,6 +1638,7 @@ select:focus {
   transform: translateY(0);
 
 }
+
 
 
 
