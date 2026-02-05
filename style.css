@@ -436,159 +436,90 @@ select:focus {
   box-sizing: border-box;
 }
 
-/* Scroll wrapper */
+/* SCROLL */
 .welcome-scroll {
   position: relative;
   width: 80%;
   max-width: 600px;
-  aspect-ratio: 3/4;               /* adjust to match your scroll image */
+  aspect-ratio: 3/4;
   background: url('scroll.png') center/contain no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-shadow: 0 25px 60px rgba(0,0,0,0.7);
   animation: float 5s ease-in-out infinite;
-  box-sizing: border-box;
   padding: 0;
-}
-
-/* Decorative top and bottom (optional) */
-.scroll-top,
-.scroll-bottom {
-  width: 100%;
-  height: 5%; /* adjust based on scroll decoration */
-}
-
-/* Inner writing area absolutely positioned for perfect fit */
-.scroll-inner {
-  position: absolute;
-  top: 25%;        /* leave space at the top */
-  bottom: 25%;     /* leave space at the bottom */
-  left: 6%;       /* leave space on left */
-  right: 5%;      /* leave space on right */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; 
-  overflow-y: auto;        /* scroll if text is too long */
- max-height: 100%;
-  padding: 10px 0;         /* inner padding inside writing area */
   box-sizing: border-box;
-  text-align: center;
-  color: #000;
-  font-family: 'Georgia', serif;
-  font-size: clamp(14px, 1.2em, 20px);
-  line-height: 1.6;
 }
 
-/* Scrollbar styling */
-.scroll-inner::-webkit-scrollbar {
-  width: 8px;
-}
-.scroll-inner::-webkit-scrollbar-thumb {
-  background: rgba(125, 84, 35, 0.705);
-  border-radius: 10px;
-}
-
-/* Float animation */
+/* FLOAT ANIMATION */
 @keyframes float {
   0% { transform: translateY(-4px); }
   50% { transform: translateY(4px); }
   100% { transform: translateY(-4px); }
 }
 
-/* Text */
-.scroll-inner h1 {
-  font-size: clamp(22px, 3.5vw, 42px);
-  margin-bottom: 15px;
-}
-.scroll-inner p {
-  font-size: clamp(12px, 1.6vw, 18px);
-  margin-bottom: 10px;
-}
-
-/* Button */
-#welcome-close {
-  padding: 10px 20px;
-  font-size: clamp(14px, 2vw, 18px);
-  border: 2px solid #7b5a2b;
-  background: #f0d9a7;
-  cursor: pointer;
-  border-radius: 10px;
-  min-width: 30px;
-  margin-top: 10px;
-}
-
-/* Character choosing */
-#characters-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 15px;
-  justify-content: center;
-}
-.character-card {
-  cursor: pointer;
-  border: 2px solid rgba(255,255,255,0.3);
-  padding: 6px;
-  border-radius: 12px;
-  flex: 0 0 auto;
-}
-.character-card img {
-  width: clamp(60px, 10vw, 90px);
-  height: clamp(60px, 10vw, 90px);
-  object-fit: contain;
-}
-/* Inner writing area for student setup (same as welcome) */
-#student-setup-overlay .scroll-inner {
-  position: absolute;
-  top: 15%;
-  bottom: 15%;
-  left: 6%;
-  right: 5%;
+/* SCROLL INNER: text + interactive elements */
+.scroll-inner {
+  width: 90%;
+  height: 90%;
   display: flex;
   flex-direction: column;
-  align-items: center;      /* center everything horizontally */
-  justify-content: flex-start; /* stack content from top */
+  align-items: center;
+  justify-content: flex-start;
   overflow-y: auto;
-  padding: 10px 0;
+  padding: 10px;
   box-sizing: border-box;
   text-align: center;
-  color: #000;
   font-family: 'Georgia', serif;
-  font-size: clamp(14px, 2vw, 20px);
-  line-height: 1.6;
-  gap: 10px; /* spacing between elements */
+  gap: 10px;
 }
 
-/* Name input section */
+/* HEADINGS & PARAGRAPHS */
+.scroll-inner h1 {
+  font-size: clamp(18px, 1.5em, 32px);
+  margin-bottom: 10px;
+}
+.scroll-inner p {
+  font-size: clamp(14px, 1em, 20px);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+/* BUTTONS */
+.scroll-inner button {
+  padding: 8px 16px;
+  font-size: 16px;
+  border: 2px solid #7b5a2b;
+  background: #f0d9a7;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* NAME INPUT SECTION */
 .name-input-section {
   display: flex;
   flex-direction: column;
-  align-items: center;   /* center input + button horizontally */
+  align-items: center;
   gap: 8px;
   margin: 10px 0;
 }
 
 .name-input-section input {
   padding: 8px 12px;
-  font-size: clamp(14px, 1.8vw, 18px);
+  font-size: 16px;
+  width: 80%;
+  max-width: 250px;
   border: 2px solid #7b5a2b;
   border-radius: 8px;
-  width: clamp(150px, 50%, 250px);
   box-sizing: border-box;
 }
 
-.name-input-section button {
-  padding: 8px 16px;
-  font-size: clamp(14px, 1.8vw, 18px);
-  border: 2px solid #7b5a2b;
-  background: #f0d9a7;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-/* Character selection */
+/* CHARACTER SELECTION */
 #character-selection {
   display: flex;
   flex-direction: column;
-  align-items: center; /* center everything horizontally */
+  align-items: center;
   width: 100%;
   margin-top: 10px;
 }
@@ -601,7 +532,7 @@ select:focus {
   margin-top: 10px;
 }
 
-/* Character cards */
+/* CHARACTER CARDS */
 .character-card {
   cursor: pointer;
   border: 2px solid rgba(255,255,255,0.3);
@@ -611,10 +542,35 @@ select:focus {
 }
 
 .character-card img {
-  width: clamp(60px, 10vw, 90px);
-  height: clamp(60px, 10vw, 90px);
+  width: clamp(50px, 20%, 90px);
+  height: auto;
   object-fit: contain;
 }
+
+/* SCROLL TOP & BOTTOM DECORATIONS */
+.scroll-top, .scroll-bottom {
+  width: 100%;
+  height: 5%; /* adjust for decoration */
+}
+
+/* RESPONSIVE FIXES FOR SMALL SCREENS */
+@media (max-width: 480px) {
+  .scroll-inner {
+    width: 95%;
+    height: 95%;
+    padding: 8px;
+  }
+  .scroll-inner h1 {
+    font-size: clamp(16px, 5vw, 24px);
+  }
+  .scroll-inner p {
+    font-size: clamp(12px, 4vw, 16px);
+  }
+  .name-input-section input {
+    width: 90%;
+  }
+}
+
 
 
 /* =========================================================================================
@@ -2109,6 +2065,7 @@ select:focus {
     background: white !important;
   }
 }
+
 
 
 
