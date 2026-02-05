@@ -467,12 +467,13 @@ select:focus {
   flex-direction: column;
   justify-content: flex-start; 
   overflow-y: auto;        /* scroll if text is too long */
+ max-height: 100%;
   padding: 10px 0;         /* inner padding inside writing area */
   box-sizing: border-box;
   text-align: center;
   color: #000;
   font-family: 'Georgia', serif;
-  font-size: clamp(14px, 2vw, 20px);
+  font-size: clamp(14px, 1.2em, 20px);
   line-height: 1.6;
 }
 
@@ -2108,6 +2109,7 @@ select:focus {
     background: white !important;
   }
 }
+
 
 
 
