@@ -254,21 +254,30 @@
 <!-- STUDENT SETUP POPUP ------------------------------------------------------------->
 <div id="student-setup-overlay" class="welcome-overlay" style="display:none;">
   <div class="welcome-scroll">
-    <div class="scroll-body">
+    <div class="scroll-top"></div> <!-- decorative top -->
+
+    <!-- Inner writing area -->
+    <div class="scroll-inner">
       <h1>Welcome, Artist!</h1>
       <p>Please enter your name to begin.</p>
 
-      <input id="student-name-input" type="text" placeholder="Enter your name" />
+      <!-- Name input -->
+      <div class="name-input-section">
+        <input id="student-name-input" type="text" placeholder="Enter your name" />
+        <button id="student-name-submit">Next</button>
+      </div>
 
-      <button id="student-name-submit">Next</button>
-
+      <!-- Character selection, initially hidden -->
       <div id="character-selection" style="display:none;">
         <h2>Choose your character</h2>
         <div id="characters-list"></div>
       </div>
     </div>
+
+    <div class="scroll-bottom"></div> <!-- decorative bottom -->
   </div>
 </div>
+
 <!--Rationale pop up------------------------------------------------------------------->
 <div id="rationale-overlay" class="welcome-overlay">
   <div class="welcome-scroll">
@@ -440,4 +449,5 @@
 </body>
 
 </html>
+
 
