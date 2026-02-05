@@ -441,37 +441,39 @@ select:focus {
   position: relative;
   width: 80%;
   max-width: 600px;          /* adjust based on your scroll image */
-  aspect-ratio: 3/4;         /* adjust to match your scroll image ratio */
+  aspect-ratio: 3/4;         /* match your scroll image ratio */
   background: url('scroll.png') center/contain no-repeat;
   display: flex;
-  flex-direction: column;
-  justify-content: center;   /* vertically centers text */
-  align-items: center;
-  padding: clamp(20px, 4vw, 60px); /* responsive padding */
+  justify-content: center;   /* horizontally center inner content */
+  align-items: center;       /* vertically center inner content */
   box-shadow: 0 25px 60px rgba(0,0,0,0.7);
   animation: float 5s ease-in-out infinite;
   box-sizing: border-box;
+  padding: 0;                /* no padding here */
 }
 
-/* Body content inside scroll */
-.scroll-body {
-  flex: 1;                   /* fills remaining vertical space */
-  width: 100%;
+/* Inner container defining the actual writing area */
+.scroll-inner {
+  width: 80%;                /* width relative to scroll image */
+  height: 70%;               /* height relative to scroll image, adjust for top/bottom edges */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* vertically center short text */
+  overflow-y: auto;          /* scroll if text too long */
+  padding: clamp(10px, 2vw, 30px); /* internal padding inside writing area */
   box-sizing: border-box;
   text-align: center;
   color: #000000;
   font-family: 'Georgia', serif;
-  word-wrap: break-word;
-  font-size: clamp(14px, 2vw, 20px); /* responsive font size */
-  overflow-y: auto;          /* scroll if text is too long */
-  padding: clamp(10px, 2vw, 40px); /* internal padding inside scroll */
+  font-size: clamp(14px, 2vw, 20px);
+  line-height: 1.6;
 }
 
 /* Scrollbar styling */
-.scroll-body::-webkit-scrollbar {
+.scroll-inner::-webkit-scrollbar {
   width: 8px;
 }
-.scroll-body::-webkit-scrollbar-thumb {
+.scroll-inner::-webkit-scrollbar-thumb {
   background: rgba(125, 84, 35, 0.705);
   border-radius: 10px;
 }
@@ -484,14 +486,13 @@ select:focus {
 }
 
 /* Text styling */
-.welcome-scroll h1 {
+.scroll-inner h1 {
   font-size: clamp(22px, 3.5vw, 42px);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
-.welcome-scroll p {
+.scroll-inner p {
   font-size: clamp(12px, 1.6vw, 18px);
-  line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 /* Button styling */
@@ -503,6 +504,7 @@ select:focus {
   cursor: pointer;
   border-radius: 10px;
   min-width: 120px;
+  margin-top: 10px;
 }
 
 /* Character choosing */
@@ -2019,6 +2021,7 @@ select:focus {
     background: white !important;
   }
 }
+
 
 
 
