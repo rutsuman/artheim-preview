@@ -3135,4 +3135,108 @@ function loadAvailableCharacters() {
         charactersList.appendChild(charDiv);
       });
     });
+
 }
+
+// Responsive adjustments on load and resize
+function handleResponsiveAdjustments() {
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    // Adjust font size based on viewport
+    const baseWidth = 1360;
+    const baseHeight = 768;
+    
+    // Calculate scaling factor
+    const widthScale = Math.min(viewportWidth / baseWidth, 1);
+    const heightScale = Math.min(viewportHeight / baseHeight, 1);
+    const scale = Math.min(widthScale, heightScale);
+    
+    // Apply scaling to map container if needed
+    const mapContainer = document.getElementById('map-container');
+    if (mapContainer && viewportWidth < 1360) {
+        mapContainer.style.transform = `scale(${scale})`;
+        mapContainer.style.transformOrigin = 'top left';
+        mapContainer.style.width = `${100 / scale}%`;
+    } else {
+        mapContainer.style.transform = 'none';
+        mapContainer.style.width = '100%';
+    }
+    
+    // Adjust hotspot sizes for touch devices
+    const hotspots = document.querySelectorAll('.hotspot');
+    const isMobile = viewportWidth <= 768;
+    
+    hotspots.forEach(hotspot => {
+        if (isMobile) {
+            // Increase touch target size on mobile
+            hotspot.style.width = '5%';
+            hotspot.style.height = '1.5%';
+            hotspot.style.cursor = 'pointer';
+        } else {
+            // Reset to original size
+            hotspot.style.width = '';
+            hotspot.style.height = '';
+        }
+    });
+    
+    // Adjust quest popup positioning on mobile
+    const questOverlay = document.getElementById('quest-overlay');
+    if (questOverlay && viewportWidth <= 768) {
+        questOverlay.style.padding = '10px';
+    }
+    
+    // Adjust profile popup on mobile
+    const profilePopup = document.getElementById('profile-popup');
+    if (profilePopup && viewportWidth <= 768) {
+        profilePopup.style.maxHeight = '90vh';
+        profilePopup.style.overflowY = 'auto';
+    }
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
+    handleResponsiveAdjustments();
+    
+    // Add resize listener
+    window.addEventListener('resize', handleResponsiveAdjustments);
+    
+    // Add orientation change listener
+    window.addEventListener('orientationchange', () => {
+        setTimeout(handleResponsiveAdjustments, 100);
+    });
+    
+    // Prevent zoom on mobile (optional)
+    document.addEventListener('touchmove', (e) => {
+        if (e.scale !== 1) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+});
+
+// Touch event handlers for hotspots on mobile
+document.addEventListener('touchstart', (e) => {
+    // This helps prevent accidental clicks when scrolling
+    if (e.target.classList.contains('hotspot')) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// Ensure quest search results are visible on mobile
+function adjustSearchResults() {
+    const searchResults = document.getElementById('quest-search-results');
+    const searchInput = document.getElementById('quest-search');
+    
+    if (searchResults && searchInput && window.innerWidth <= 768) {
+        // Position results below input
+        searchResults.style.position = 'absolute';
+        searchResults.style.top = `${searchInput.offsetTop + searchInput.offsetHeight}px`;
+        searchResults.style.left = `${searchInput.offsetLeft}px`;
+        searchResults.style.width = `${searchInput.offsetWidth}px`;
+        searchResults.style.zIndex = '10000';
+        searchResults.style.maxHeight = '200px';
+    }
+}
+
+// Call this when search input gains focus
+document.getElementById('quest-search')?.addEventListener('focus', adjustSearchResults);
