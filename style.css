@@ -411,7 +411,7 @@ select:focus {
 /* Body content */
 .scroll-body {
   width: 100%;
-  max-width: 70%;
+  max-width: 20%;
   text-align: center;
   color: #000000;
   font-family: 'Georgia', serif;
@@ -1638,5 +1638,6 @@ select:focus {
   transform: translateY(0);
 
 }
+
 
 
