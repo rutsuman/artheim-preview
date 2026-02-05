@@ -8,17 +8,13 @@ html, body {
     overflow-x: hidden; /* no horizontal scroll */
     overflow-y: auto;   /* vertical scroll allowed */
     font-family: Arial, sans-serif;
-    width: 100%;
-    min-height: 100vh;
 }
 
 /* Map container */
 #map-container {
     position: relative;
     width: 100vw;
-    max-width: 100%;
     transform-origin: top left;
-    overflow: hidden;
 }
 
 /* Map image */
@@ -26,7 +22,6 @@ html, body {
     width: 100%;
     height: auto;
     display: block;
-    max-width: 100%;
 }
 
 /* Hotspots */
@@ -34,12 +29,8 @@ html, body {
     position: absolute;
     transform: translate(-50%, -50%);
     cursor: pointer;
-    width: 4vw;
-    height: 1vw;
-    min-width: 20px;
-    min-height: 5px;
-    max-width: 40px;
-    max-height: 10px;
+    width: 4%;
+    height: 1%;
 }
 
 /* Debug: show hotspots */
@@ -77,8 +68,6 @@ Dropdown MENU content
     border-radius: 5px;
     color: white;
     z-index: 3000;  /* Ensure it appears above the map */
-    max-width: calc(100% - 40px);
-    box-sizing: border-box;
 }
 
 /* Style for select elements */
@@ -90,9 +79,6 @@ select {
     margin: 5px;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%;
-    max-width: 200px;
-    font-size: clamp(12px, 2vw, 14px);
 }
 
 select:focus {
@@ -103,8 +89,7 @@ select:focus {
 #quest-search-container {
     margin-top: 10px;
     margin-right: 20px;
-    width: 100%;
-    max-width: 200px;
+    width: 200px;
 }
 #quest-search {
     width: 100%;
@@ -113,8 +98,7 @@ select:focus {
     border: none;
     background: rgb(0, 30, 180, 0.5);
     color: white;
-    font-size: clamp(12px, 2vw, 14px);
-    box-sizing: border-box;
+    font-size: 14px;
 }
 #quest-search-results {
     margin-top: 5px;
@@ -122,16 +106,12 @@ select:focus {
     overflow-y: auto;
     background: rgba(0,30,180,0.4);
     border-radius: 5px;
-    position: absolute;
-    width: 100%;
-    max-width: 200px;
 }
 .search-result {
     padding: 6px 8px;
     cursor: pointer;
-    font-size: clamp(12px, 2vw, 15px);
+    font-size: 15px;
     border-bottom: 1px solid rgba(255,255,255,0.15);
-    word-break: break-word;
 }
 .search-result:last-child {
     border-bottom: none;
@@ -140,13 +120,13 @@ select:focus {
     background: rgba(100,150,255,0.6);
 }
 .search-result strong {
-    font-size: clamp(11px, 1.8vw, 13px);
+    font-size: 13px;
     color: #cbd6ff;
     display: block;
 }
 
 .search-result span {
-    font-size: clamp(12px, 2vw, 15px);
+    font-size: 15px;
 }
 
 /* =======================================
@@ -162,7 +142,6 @@ select:focus {
     z-index: 2000;
     overflow-y: auto;
     padding: 20px;
-    box-sizing: border-box;
 }
 .quest-overlay {
   display: none;
@@ -172,7 +151,7 @@ select:focus {
   z-index: 2000;
   overflow-y: auto;
   padding: 20px;
-  box-sizing: border-box;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -184,7 +163,6 @@ select:focus {
     border-radius: 10px;
     padding: 15px;
     max-width: 900px;
-    width: 100%;
     margin: auto;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     display: grid;
@@ -192,7 +170,6 @@ select:focus {
     grid-auto-rows: min-content;
     gap: 10px;
     position: relative;
-    box-sizing: border-box;
 }
 /* Close button */
 #close-quest {
@@ -200,8 +177,7 @@ select:focus {
     top: 10px;
     right: 10px;
     cursor: pointer;
-    font-size: clamp(16px, 4vw, 20px);
-    z-index: 10;
+    font-size: 20px;
 }
 /* Quest rows */
 .quest-row {
@@ -237,17 +213,13 @@ select:focus {
 /*Quest cell glow*/
 .quest-cell:hover  {
     border-color:rgba(150,200,255,1); /* slightly ligther brighter blue*/
-    box-shadow: 0 0 10px rgba(150,200,255,0.5); /*soft glow*/
+    box-shadow: 0 0 10px rgba(150,200,255,o.5); /*soft glow*/
     transition: all 0.3s ease; /*smooth animation*/
 }
 /* Full width cell */
-.quest-cell.full { 
-    grid-column: 1 / 6; 
-    word-break: break-word;
-}
+.quest-cell.full { grid-column: 1 / 6; }
 /*rationale*/
-.rationale-cell { 
-    grid-column: 10 / 13;
+.rationale-cell { grid-column: 10 / 13;
     align-items: center;    /* vertical centering */
     justify-content: center; /* horizontal centering */
     text-align: center;   
@@ -256,14 +228,9 @@ select:focus {
 #quest-text {
     text-align: justify;
     margin: 0%;
-    word-break: break-word;
 }
-.image-cell { 
-    grid-column: 1 / 3; 
-}
-.description-cell { 
-    grid-column: 3 / 8; 
-}
+.image-cell { grid-column: 1 / 3; }
+.description-cell { grid-column: 3 / 8; }
 
 /*line 4)*/
 .quest-cell.rubric-cell {
@@ -272,24 +239,20 @@ select:focus {
     align-items: center;
     justify-content: center;
 }
-.requirements-cell { 
-    grid-column: 8 / 13; 
-}
+.requirements-cell { grid-column: 8 / 13; }
 #quest-requirements {
     text-align: justify;
     margin: 0%;
-    word-break: break-word;
 }
 /* Ensure prerequisites have bullets and padding */
 #quest-overlay #quest-prereq-leads-prereq {
     list-style-type: disc; /* Bullet points */
     padding-left: 40px; /* Indent bullets */
-    margin: 5px 0;
+    margin: 5;
 }
 /* Ensure individual list items are spaced out */
 #quest-overlay #quest-prereq-leads-prereq li {
     margin-bottom: 10px; /* Space between list items */
-    word-break: break-word;
 }
 /* Style for checked prerequisites */
 #quest-overlay .prereq-check {
@@ -302,9 +265,7 @@ select:focus {
     grid-template-columns: 1fr 1fr; /* Two columns: Links + Reward */
     gap: 10px;
 }
-.links-cell { 
-    grid-column: 1 / 6; /* Links in column A */ 
-}
+.links-cell { grid-column: 1 / 6; /* Links in column A */ }
 .reward-cell {
   grid-column: 6 / 13;
   display: flex;
@@ -312,26 +273,23 @@ select:focus {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: clamp(14px, 3vw, 20px);
-}
+  font-size: clamp(17px, 4vw, 20px);
+
 /* VALUE + ICON INLINE */
 .reward-cell p {
   display: flex;
   align-items: center;
   gap: 6px;                     /* space between number and icon */
   margin: 0;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 .reward-cell strong:last-child {
   margin-left: 6px;
 }
 
-/* Stars */
+}/* Stars */
 .stars {
     display: inline-flex;
     gap: 2px;
-    flex-wrap: wrap;
 }
 .star.solid { color: gold; }
 .star.outline { color: transparent; -webkit-text-stroke: 1px gold; }
@@ -340,7 +298,6 @@ select:focus {
     width: 100%;
     height: auto;
     border-radius: 8px;
-    max-width: 100%;
 }
 /*default quest box (blue)*/
 #quest-box {
@@ -361,7 +318,6 @@ select:focus {
 #quest-box a {
     color: white; /* Change link text color to white */
     text-decoration: none; /* Optional: removes underline */
-    word-break: break-all;
 }
 #quest-box a:hover {
     color: #ccc; /* Light grey when hovering, you can adjust this to any color */
@@ -370,12 +326,12 @@ select:focus {
 #quest-box.completed {
     background-color: rgba(0, 0, 0, 0.4); /* Gray background */
     border-color: silver; /* Silver border for completed quests */
-    box-shadow: 0 0 10px rgba(150,200,255,0.5); /*soft glow*/
+    box-shadow: 0 0 10px rgba(150,200,255,o.5); /*soft glow*/
 }
 #quest-box.completed .quest-cell {
     background-color: rgba(0, 0, 0, 0.4); /* Lighter gray for inner cells */
     border-color: silver; /* Silver border for cells */
-    box-shadow: 0 0 10px rgba(150,200,255,0.5); /*soft glow*/
+    box-shadow: 0 0 10px rgba(150,200,255,o.5); /*soft glow*/
 }
 #quest-box.completed .quest-cell:hover{
     border-color: rgba(182, 182, 182, 0.4);
@@ -388,7 +344,6 @@ select:focus {
     border: 1px solid #ccc; /* Light border */
     border-radius: 5px;
     transition: background-color 0.3s ease;
-    font-size: clamp(12px, 2vw, 14px);
 }
 /* Active tab styles */
 .tab-button.active {
@@ -421,8 +376,7 @@ select:focus {
         box-shadow: 0px 0px 40px rgb(255, 1, 1);
     }
 }
-/* WELCOME OVERLAY =============================================*/
-/* OVERLAY */
+/* WELLCOME==========================================================================================*/
 .welcome-overlay {
   position: fixed;
   top: 0;
@@ -435,138 +389,93 @@ select:focus {
   background: rgba(0,0,0,0.7);
   z-index: 9999;
 }
-
-/* SCROLL */
+/* Scroll wrapper */
 .welcome-scroll {
+  position: relative;
+  width: 85%;
+  max-width: 900px;
+  height: 80vh;
+  background: url('scroll.png') center/contain no-repeat;
+
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 80%;
-  max-width: 600px;
-  aspect-ratio: 3/4;
-  background: url('scroll.png') center/contain no-repeat;
-  background-size: contain;
+  will-change: transform, opacity;
+
+  padding: 80px 60px;
   box-shadow: 0 25px 60px rgba(0,0,0,0.7);
-  padding: 10px;
-  box-sizing: border-box;
   animation: float 5s ease-in-out infinite;
 }
+/* Body content */
+.scroll-body {
+  width: 100%;
+  max-width: 680px;
+  text-align: center;
+  color: #000000;
+  font-family: 'Georgia', serif;
+  z-index: 2;
 
-/* FLOAT */
+  /* AUTO FIT TEXT */
+  font-size: clamp(16px, 2.2vw, 20px);
+
+  /* SCROLL IF TOO LONG */
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+/* Scrollbar styling */
+.scroll-body::-webkit-scrollbar {
+  width: 8px;
+}
+.scroll-body::-webkit-scrollbar-thumb {
+  background: rgba(125, 84, 35, 0.705);
+  border-radius: 10px;
+}
+/* Float animation */
 @keyframes float {
   0% { transform: translateY(-4px); }
   50% { transform: translateY(4px); }
   100% { transform: translateY(-4px); }
 }
-
-/* SCROLL CONTENT */
-.scroll-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  overflow-y: auto;
-  width: 90%;
-  height: 100%;
-  padding: 10px 0;
-  box-sizing: border-box;
-  text-align: center;
-  gap: 10px;
+/* Text */
+.welcome-scroll h1 {
+  font-size: clamp(26px, 4vw, 42px);
+  margin-bottom: 20px;
 }
-
-/* HEADINGS & PARAGRAPHS */
-.scroll-content h1 {
-  font-size: clamp(22px, 3vw, 36px);
-  margin-bottom: 10px;
+.welcome-scroll p {
+  font-size: clamp(14px, 1.6vw, 18px);
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
-.scroll-content p {
-  font-size: clamp(14px, 2vw, 20px);
-  line-height: 1.5;
-  margin-bottom: 8px;
-}
-
-/* BUTTONS */
-.scroll-content button {
-  padding: 8px 16px;
-  font-size: 16px;
+/* Button */
+#welcome-close {
+  padding: 12px 28px;
+  font-size: 18px;
   border: 2px solid #7b5a2b;
   background: #f0d9a7;
-  border-radius: 8px;
   cursor: pointer;
+  border-radius: 10px;
 }
-
-/* NAME INPUT */
-.name-input-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  margin: 10px 0;
-}
-.name-input-section input {
-  padding: 8px 12px;
-  font-size: 16px;
-  width: 80%;
-  max-width: 250px;
-  border: 2px solid #7b5a2b;
-  border-radius: 8px;
-  box-sizing: border-box;
-}
-.name-input-section button {
-  padding: 8px 16px;
-  font-size: 16px;
-  border: 2px solid #7b5a2b;
-  background: #f0d9a7;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-/* CHARACTER LIST */
+/*character choosing*/
 #characters-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 .character-card {
   cursor: pointer;
   border: 2px solid rgba(255,255,255,0.3);
-  border-radius: 12px;
   padding: 6px;
-  flex: 0 0 auto;
+  border-radius: 12px;
 }
 .character-card img {
-  width: clamp(60px, 20%, 90px);
-  height: auto;
+  width: 90px;
+  height: 90px;
   object-fit: contain;
 }
-
-/* SCROLL TOP & BOTTOM DECORATIONS */
-.scroll-top, .scroll-bottom {
-  width: 100%;
-  height: 5%;
-}
-
-/* RESPONSIVE SMALL SCREENS */
-@media (max-width: 480px) {
-  .welcome-scroll {
-    width: 95%;
-  }
-  .scroll-content h1 {
-    font-size: clamp(18px, 5vw, 24px);
-  }
-  .scroll-content p {
-    font-size: clamp(12px, 4vw, 16px);
-  }
-  .name-input-section input {
-    width: 90%;
-  }
-}
-
-
-
-/* =========================================================================================
+/* ==========================
    RUBRIC POPUP (Quest-style)
    ========================== */
 #rubric-overlay {
@@ -577,15 +486,12 @@ select:focus {
   background: rgba(0,0,0,0.7);
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  box-sizing: border-box;
 }
 
 .rubric-box {
   position: relative;
   max-width: 1000px;
   max-height: 80vh;
-  width: 100%;
   overflow-y: auto;
   background-color: rgba(0,30,180,0.3); /* semi-dark blue */
   color: #fff;
@@ -597,7 +503,6 @@ select:focus {
   grid-auto-rows: min-content;
   gap: 10px;
   margin: auto;
-  box-sizing: border-box;
 }
 
 #rubric-title {
@@ -605,11 +510,10 @@ select:focus {
   text-align: center;
   margin: 0;
   padding: 10px 0;
-  font-size: clamp(18px, 3vw, 26px);
+  font-size: 26px;
   font-weight: bold;
   color: #fff;
   background: rgba(0,30,180,0.25);
-  word-break: break-word;
 }
 
 /* Rubric content */
@@ -619,7 +523,6 @@ select:focus {
   border: 2px solid rgba(100,150,255,0.7);
   border-radius: 8px;
   padding: 15px;
-  overflow-x: auto;
 }
 
 /* Optional: hover glow like quest cells */
@@ -632,17 +535,16 @@ select:focus {
   width: 100%;
   border-collapse: collapse;
   margin-top: 0px;
-  min-width: 600px;
+  
 }
 
 .rubric-table th,
 .rubric-table td {
   border: 2px solid rgba(100,150,255,0.7);
-  padding: 8px;
+  padding: 10px;
   background: rgba(0,30,180,0.2);
   color: white;
   text-align: left;
-  font-size: clamp(12px, 1.8vw, 14px);
 }
 
 .rubric-table th {
@@ -659,7 +561,7 @@ select:focus {
   position: absolute;
   top: 12px;
   right: 12px;
-  font-size: clamp(18px, 3vw, 24px);
+  font-size: 24px;
   color: white;
   background: transparent;
   border: none;
@@ -731,14 +633,15 @@ select:focus {
   background: transparent !important;
   padding: 0;
   margin: 0;
+/*  box-shadow: 0 4px 10px rgba(0,0,0,0.25); - square around the button*/
 }
 
 .profile-btn img {
-  width: clamp(50px, 10vw, 80px);
-  height: clamp(50px, 10vw, 80px);
+  width: 80px; /* Set your desired size here */
+  height: 80px;
   object-fit: contain;
   display: block;
-  border-radius: 0;
+  border-radius: 0; /* Remove any rounding */
 }
 
 
@@ -754,8 +657,6 @@ select:focus {
   align-items: center;
   background: rgba(0,0,0,0.65);
   z-index: 999;
-  padding: 20px;
-  box-sizing: border-box;
 }
 
 /* POPUP (match quest style) */
@@ -765,10 +666,9 @@ select:focus {
   background: rgba(0,30,180,0.3);
   border: 3px solid #5b4b3a;
   border-radius: 16px;
-  padding: 20px;
+  padding: 24px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.25);
   position: relative;
-  box-sizing: border-box;
 }
 
 /* CLOSE BUTTON */
@@ -778,24 +678,23 @@ select:focus {
   right: 12px;
   border: none;
   background: transparent;
-  font-size: clamp(20px, 3vw, 28px);
+  font-size: 28px;
   cursor: pointer;
   color: white;
 }
 .profile-title {
   text-align: center;
-  font-size: clamp(18px, 3vw, 24px);
+  font-size: 24px;
   font-weight: 700;
   color: #fff;
   margin: 15px 0;
-  word-break: break-word;
 }
 
 /* GRID */
 .profile-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  gap: 24px;
   align-items: center;
 }
 
@@ -817,8 +716,8 @@ select:focus {
 }
 
 .student-avatar {
-  width: clamp(80px, 15vw, 120px);
-  height: clamp(80px, 15vw, 120px);
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -834,10 +733,9 @@ select:focus {
 
 .student-name {
   margin-top: 10px;
-  font-size: clamp(16px, 2.5vw, 22px);
+  font-size: 22px;
   font-weight: bold;
   color: white;
-  word-break: break-word;
 }
 
 /* CENTER COLUMN */
@@ -849,7 +747,7 @@ select:focus {
 
 /* RIGHT COLUMN */
 .profile-right {
-  font-size: clamp(14px, 1.8vw, 16px);
+  font-size: 16px;
   text-align: center;
   color: white;
 }
@@ -861,24 +759,20 @@ select:focus {
 
 .profile-right li {
   margin: 8px 0;
-  word-break: break-word;
 }
 /* Table Styles */
 #standards-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  background-color: rgba(0, 30, 180, 0.3);
+  background-color: rgba(0, 30, 180, 0.3); /* semi-dark blue */
   color: #fff;
   border-radius: 30px;
-  border:2px solid rgba(100,150,255,0.7);
-  padding: 20px;
+  border:2px solid rgba(100,150,255,0.7); /*light blue border*/
+  padding: 50px;
   max-width: 900px;
   margin: auto;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  box-sizing: border-box;
-  overflow-x: auto;
-  display: block;
 }
 
 #standards-table th,
@@ -886,28 +780,26 @@ select:focus {
   padding: 8px;
   text-align: center;
   border-bottom: 1px solid rgba(100,150,255,0.7);
-  font-size: clamp(12px, 1.8vw, 14px);
 }
 
 #standards-table th {
-  background-color: rgba(0, 30, 180, 0.5);
+  background-color: rgba(0, 30, 180, 0.5); /* darker blue for header */
   border-radius: 10px;
-  white-space: nowrap;
 }
 
 #standards-table td {
-  font-size: clamp(12px, 1.8vw, 14px);
+  font-size: 14px;
 }
 
 #standards-table tr:hover {
-  background-color: rgba(0, 30, 180, 0.5);
+  background-color: rgba(0, 30, 180, 0.5); /* highlight rows when hovering */
 }
 .radar-tooltip {
   background: white;
   color:#000000;
   padding: 6px 10px;
   border-radius: 6px;
-  font-size: clamp(11px, 1.6vw, 13px);
+  font-size: 13px;
   white-space: nowrap;
 }
 #radar-tooltip {
@@ -918,8 +810,6 @@ select:focus {
 }
 #radar-chart-container {
   position: relative;
-  width: 100%;
-  height: auto;
 }
 /* ============================================
    PROFILE ACTION BUTTONS (Under Name)
@@ -930,15 +820,14 @@ select:focus {
   margin-top: 15px;
   justify-content: center;
   width: 100%;
-  flex-wrap: wrap;
 }
 .profile-btn-small {
-  padding: 8px 12px;
+  padding: 8px 8px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-family: 'Times New Roman', serif;
-  font-size: clamp(12px, 1.6vw, 14px);
+  font-size: 0.9em;
   font-weight: bold;
   text-align: center;
   transition: all 0.2s ease;
@@ -1045,7 +934,7 @@ select:focus {
   padding: 1px;
 }
 .student-name {
-  font-size: clamp(16px, 2.5vw, 22px);
+  font-size: 1.2em;
   font-weight: bold;
   color: #fff;
   text-align: center;
@@ -1053,7 +942,7 @@ select:focus {
   margin-bottom: 5px;
 }
 #characters-list img {
-  width: clamp(60px, 10vw, 80px);
+  width: 80px;
   margin: 5px;
   border: 2px solid transparent;
   border-radius: 10px;
@@ -1062,10 +951,10 @@ select:focus {
   border-color: gold;
 }
 #student-avatar {
-  width: clamp(80px, 15vw, 120px);
-  height: auto;
-  max-height: 120px;
-  object-fit: contain;
+  width: 120px;       /* smaller size */
+  height: auto;       /* keep aspect ratio */
+  max-height: 120px;  /* prevent too tall images */
+  object-fit: contain; /* prevent distortion */
   border-radius: 10px;
 }
 .avatar-wrapper {
@@ -1073,7 +962,7 @@ select:focus {
   display: inline-block;
 }
 .avatar-wrapper img {
-  width: clamp(80px, 15vw, 120px);
+  width: 120px;
   height: auto;
   max-height: 120px;
   object-fit: contain;
@@ -1084,13 +973,13 @@ select:focus {
   top: 0;
   left: 0;
   transform: translate(-30%, -30%);
-  width: clamp(24px, 4vw, 32px);
-  height: clamp(24px, 4vw, 32px);
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: none;
   background: rgba(255,255,255,0.8);
   cursor: pointer;
-  font-size: clamp(14px, 2.5vw, 18px);
+  font-size: 18px;
 }
 .hide-setup-text .welcome-scroll h1,
 .hide-setup-text .welcome-scroll p {
@@ -1102,22 +991,21 @@ select:focus {
   background: rgba(42, 16, 190, 0.2);
   border-radius: 5px;
   padding: 4px 1px;
-  font-size: clamp(18px, 3vw, 24px);
+  font-size: 24px;
   font-weight: bold;
   color: #ffffff; 
   text-align: center;
-  min-width: 60px;
-  margin-left: 5px;
+  min-width: 80px;
+  margin-left: 10px;
 }
 .money-icon {
-  font-size: clamp(20px, 3.5vw, 28px);
+  font-size: 28px;
   vertical-align: center;
   color: white;
 }
 .profile-money {
   margin-top: 5px;
   text-align: center;
-  font-size: clamp(14px, 2vw, 16px);
 }
 /* Deduct rewards button styling */
 .deduct-btn {
@@ -1128,7 +1016,7 @@ select:focus {
     padding: 8px 15px;
     margin-top: 10px;
     cursor: pointer;
-    font-size: clamp(12px, 2vw, 14px);
+    font-size: 14px;
     font-weight: bold;
     transition: all 0.3s;
     width: 100%;
@@ -1156,8 +1044,6 @@ select:focus {
   justify-content: center;
   align-items: center;
   z-index: 10000;
-  padding: 20px;
-  box-sizing: border-box;
 }
 /* Scroll body */
 .rationale-scroll {
@@ -1167,20 +1053,18 @@ select:focus {
   max-width: 900px;
   width: 85%;
   max-height: 85vh;
-  padding: clamp(30px, 5vw, 60px) clamp(20px, 4vw, 70px);
+  padding: 60px 70px;
   box-shadow: 0 30px 80px rgba(0,0,0,0.8);
   color: #3d2a1b;
   font-family: 'Georgia', serif;
   position: relative;
   overflow-y: auto;
-  box-sizing: border-box;
 }
 /* Title */
 .rationale-scroll h1 {
   text-align: center;
-  font-size: clamp(32px, 5vw, 80px);
+  font-size: 80px;
   margin-bottom: 0px;
-  word-break: break-word;
 }
 /* Close button */
 #rationale-close {
@@ -1189,7 +1073,7 @@ select:focus {
   right: 20px;
   background: none;
   border: none;
-  font-size: clamp(20px, 3vw, 28px);
+  font-size: 28px;
   cursor: pointer;
   color: #5b3c1c;
 }
@@ -1208,14 +1092,13 @@ select:focus {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  padding: clamp(10px, 2vw, 14px) clamp(12px, 2vw, 18px);
-  font-size: clamp(14px, 2vw, 16px);
+  padding: 14px 18px;
+  font-size: 16px;
   border-radius: 12px;
   background: rgba(0,30,180,0.3);
   color: white;
   cursor: pointer;
   z-index: 1000;
-  max-width: calc(100% - 40px);
 }
 /* Achievements overlay */
 #achievements-overlay {
@@ -1227,7 +1110,6 @@ select:focus {
     align-items: center;
     z-index: 9999;
     padding: 20px;
-    box-sizing: border-box;
 }
 /* Achievements container - match quest popup style */
 #achievements-overlay .quest-box {
@@ -1244,14 +1126,13 @@ select:focus {
     grid-auto-rows: min-content;
     gap: 10px;
     position: relative;
-    box-sizing: border-box;
 }
 /* Close Button */
 #achievements-overlay .close-btn {
   position: absolute;
   top: 18px;
   right: 18px;
-  font-size: clamp(18px, 3vw, 24px);
+  font-size: 24px;
   cursor: pointer;
   color: #fff;
 }
@@ -1262,7 +1143,6 @@ select:focus {
   gap: 10px;
   justify-content: center;
   margin-bottom: 0;
-  flex-wrap: wrap;
 }
 /* Tab buttons */
 #achievements-overlay .tab-button {
@@ -1272,7 +1152,6 @@ select:focus {
   color: #fff;
   cursor: pointer;
   border-radius: 8px;
-  font-size: clamp(12px, 2vw, 14px);
 }
 #achievements-overlay .tab-button.active {
   background: rgba(255,255,255,0.15);
@@ -1281,12 +1160,11 @@ select:focus {
 #achievements-overlay .tab-content {
   grid-column: 1 / -1;
   width: 100%;
-  overflow-x: auto;
 }
 /* Completed quests grid */
 #achievements-overlay .completed-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-top: 10px;
 }
@@ -1295,17 +1173,15 @@ select:focus {
   border: 2px solid rgba(150,200,255,1);
   padding: 12px;
   border-radius: 10px;
-  min-width: 0;
 }
 /* Path title */
 #achievements-overlay .completed-grid h3 {
   margin-top: 0;
   margin-bottom: 10px;
   text-align: center;
-  font-size: clamp(14px, 2vw, 16px);
+  font-size: 16px;
   font-weight: bold;
   color: #fff;
-  word-break: break-word;
 }
 /* Quest links inside columns */
 #achievements-overlay .completed-grid a {
@@ -1317,7 +1193,6 @@ select:focus {
   background: rgba(0,0,0,0.15);
   color: #fff;
   text-decoration: none;
-  word-break: break-word;
 }
 /* Hover effect like quest cells */
 #achievements-overlay .completed-grid a:hover {
@@ -1336,12 +1211,10 @@ select:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
 }
 #achievements-list a {
   color: white !important;
   text-decoration: none;
-  word-break: break-word;
 }
 #achievements-list a:hover {
   color: #ddd !important;
@@ -1357,12 +1230,12 @@ select:focus {
 }
 .ach-check {
   color: white;
-  margin-left: 10px;
+  margin-left: 10px; /* checkmark AFTER the title */
 }
 .achievement-expand {
   border: none;
   background: transparent;
-  font-size: clamp(16px, 2.5vw, 18px);
+  font-size: 18px;
   cursor: pointer;
   color: white;
 }
@@ -1374,13 +1247,12 @@ select:focus {
 }
 /* Note styling */
 .achievement-note {
-  font-size: clamp(12px, 1.8vw, 14px);
+  font-size: 0.95em;
   opacity: 0.8;
   font-style: italic;
   margin-top: 6px;
   display: none;
   color:aquamarine;
-  word-break: break-word;
 }
 /* Show note only when expanded */
 .achievement-item.expanded .achievement-note {
@@ -1396,12 +1268,12 @@ select:focus {
 }
 @keyframes redWarningPulse {
     0% {
-        background: rgba(30, 80, 160, 0.9);
+        background: rgba(30, 80, 160, 0.9); /* your normal blue */
         box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
         border-color: rgba(255, 100, 100, 0.8);
     }
     50% {
-        background: rgba(139, 0, 0, 0.8);
+        background: rgba(139, 0, 0, 0.8); /* deep red pulse */
         box-shadow: 0 0 40px rgba(255, 0, 0, 0.7);
         border-color: rgba(255, 50, 50, 1);
     }
@@ -1513,7 +1385,7 @@ select:focus {
     grid-column: auto !important;
     white-space: nowrap;
     padding: 6px 8px;
-    font-size: clamp(12px, 2vw, 14px);
+    font-size: 14px;
 }
 /* =================================================
    QUEST HEADER – CUSTOM 2-LINE LAYOUT
@@ -1540,7 +1412,7 @@ select:focus {
     grid-column: auto !important;
     white-space: nowrap;
     padding: 6px 8px;
-    font-size: clamp(12px, 2vw, 14px);
+    font-size: 14px;
 }
 /* Difficulty + stars never wrap */
 .stars,
@@ -1557,7 +1429,7 @@ select:focus {
 /* Timer display styling */
 .timer-display {
     font-weight: bold;
-    font-size: clamp(12px, 2vw, 14px);
+    font-size: 14px;
 }
 /* Rationale button centered */
 .rationale-cell {
@@ -1616,19 +1488,18 @@ select:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9998;
-  pointer-events: none;
+  z-index: 9998; /* Above map but below overlays */
+  pointer-events: none; /* Allow clicking through to map */
 }
 #welcome-tour-image-wrapper {
   position: absolute;
   z-index: 9999;
   pointer-events: none;
   transition: all 0.2s ease-in-out;
-  max-width: 90vw;
 }
 #welcome-tour-image {
-  max-width: min(1000px, 90vw);
-  max-height: min(800px, 80vh);
+  max-width: 1000px;
+  max-height: 800px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0);
   pointer-events: none;
@@ -1637,32 +1508,31 @@ select:focus {
   position: fixed;
   background: rgba(35, 121, 14, 0.911);
   color: white;
-  padding: 20px;
+  padding: 30px;
   border-radius: 100px;
-  max-width: min(500px, 90vw);
+  max-width: 500px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   z-index: 10000;
   pointer-events: auto;
   transition: all 0.2s ease-in-out;
   font-family: 'Georgia', serif;
-  box-sizing: border-box;
 }
 #welcome-tour-talk-bubble:after {
   content: '';
   position: absolute;
   border-width: 15px;
   border-style: solid;
+  
 }
 #welcome-tour-text {
-  font-size: clamp(14px, 2.5vw, 18px);
+  font-size: 18px;
   margin-bottom: 10px;
   line-height: 1.5;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   text-align: center;
-  word-break: break-word;
 }
 #welcome-tour-counter {
-  font-size: clamp(12px, 2vw, 14px);
+  font-size: 14px;
   opacity: 0.8;
   font-style: italic;
   margin-bottom: 15px;
@@ -1679,11 +1549,11 @@ select:focus {
   border: 2px solid #8B4513;
   padding: 8px 16px;
   border-radius: 20px;
-  font-size: clamp(12px, 2vw, 14px);
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Georgia', serif;
-  min-width: 80px;
+  min-width: 100px;
   font-weight: bold;
 }
 #welcome-tour-controls button:hover {
@@ -1749,11 +1619,10 @@ select:focus {
   color: white;
   border: none;
   border-radius: 8px;
-  font-size: clamp(12px, 2vw, 14px);
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 120px;
 }
 .tour-btn:hover {
   transform: translateY(-2px);
@@ -1762,317 +1631,3 @@ select:focus {
 .tour-btn:active {
   transform: translateY(0);
 }
-
-/* =======================================
-   RESPONSIVE MEDIA QUERIES
-   ======================================= */
-
-/* Tablet Screens (768px and below) */
-@media (max-width: 768px) {
-  /* Adjust dropdown container */
-  #dropdown-container {
-    top: 10px;
-    left: 10px;
-    padding: 8px;
-    max-width: calc(100% - 20px);
-  }
-  
-  /* Profile button */
-  .profile-btn {
-    top: 10px;
-    right: 10px;
-  }
-  
-  /* Quest box grid adjustments */
-  #quest-box {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
-    padding: 10px;
-  }
-  
-  /* Adjust grid columns for smaller screens */
-  .image-cell {
-    grid-column: 1 / 3;
-  }
-  
-  .description-cell {
-    grid-column: 3 / 7;
-  }
-  
-  .requirements-cell {
-    grid-column: 1 / 7;
-    margin-top: 10px;
-  }
-  
-  .links-cell {
-    grid-column: 1 / 4;
-  }
-  
-  .reward-cell {
-    grid-column: 4 / 7;
-  }
-  
-  /* Profile grid */
-  .profile-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  /* Welcome scroll */
-  .welcome-scroll {
-    height: 85vh;
-    padding: 20px;
-  }
-  
-  .scroll-body {
-    max-width: 85%;
-  }
-  
-  /* Achievements grid */
-  #achievements-overlay .completed-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  /* Quest header rows for mobile */
-  #quest-box > .quest-row:nth-of-type(1),
-  #quest-box > .quest-row:nth-of-type(2) {
-    grid-template-columns: 1fr;
-    gap: 5px;
-  }
-  
-  #quest-box > .quest-row:nth-of-type(1) .quest-cell,
-  #quest-box > .quest-row:nth-of-type(2) .quest-cell {
-    grid-column: 1 / -1 !important;
-    text-align: center;
-  }
-  
-  /* Rationale cell */
-  .rationale-cell {
-    grid-column: 1 / -1;
-    margin-top: 10px;
-  }
-}
-
-/* Mobile Screens (480px and below) */
-@media (max-width: 480px) {
-  /* Hotspots */
-  .hotspot {
-    width: 6vw;
-    height: 1.5vw;
-    min-width: 15px;
-    min-height: 4px;
-  }
-  
-  /* Quest box adjustments */
-  #quest-box {
-    grid-template-columns: repeat(4, 1fr);
-    padding: 8px;
-    gap: 6px;
-  }
-  
-  /* Single column layout for very small screens */
-  .image-cell,
-  .description-cell,
-  .requirements-cell,
-  .links-cell,
-  .reward-cell {
-    grid-column: 1 / -1;
-  }
-  
-  /* Remove grid display for quest rows on mobile */
-  .quest-row:nth-of-type(4) {
-    display: block;
-  }
-  
-  /* Profile action buttons */
-  .profile-action-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .profile-btn-small {
-    max-width: 100%;
-    width: 100%;
-  }
-  
-  /* Welcome tour talk bubble */
-  #welcome-tour-talk-bubble {
-    padding: 15px;
-    border-radius: 50px;
-  }
-  
-  /* Welcome tour controls */
-  #welcome-tour-controls {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  #welcome-tour-controls button {
-    width: 100%;
-    max-width: 200px;
-  }
-  
-  /* Radar chart container */
-  #radar-chart-container {
-    max-width: 100%;
-    overflow: hidden;
-  }
-  
-  /* Standards table */
-  #standards-table {
-    padding: 10px;
-    border-radius: 15px;
-  }
-  
-  /* Tour button */
-  .tour-btn {
-    width: 100%;
-  }
-}
-
-/* Very Small Screens (320px and below) */
-@media (max-width: 320px) {
-  /* Further reduce padding and margins */
-  #dropdown-container {
-    top: 5px;
-    left: 5px;
-    padding: 5px;
-  }
-  
-  .profile-btn {
-    top: 5px;
-    right: 5px;
-  }
-  
-  .profile-btn img {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .achievements-btn {
-    bottom: 10px;
-    right: 10px;
-    padding: 8px 12px;
-    font-size: 12px;
-  }
-  
-  /* Quest box */
-  #quest-box {
-    padding: 5px;
-    gap: 4px;
-  }
-  
-  .quest-cell {
-    padding: 6px;
-  }
-  
-  /* Welcome scroll */
-  .welcome-scroll {
-    padding: 15px;
-  }
-  
-  .scroll-body {
-    max-width: 90%;
-    font-size: 12px;
-  }
-}
-
-/* Landscape Orientation Adjustments */
-@media (max-height: 600px) and (orientation: landscape) {
-  /* Reduce height of scroll elements */
-  .welcome-scroll,
-  .rationale-scroll {
-    height: 90vh;
-    max-height: 90vh;
-  }
-  
-  .scroll-body {
-    max-height: 70vh;
-  }
-  
-  /* Quest overlay */
-  #quest-overlay {
-    padding: 10px;
-  }
-  
-  #quest-box {
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-  
-  /* Profile popup */
-  .popup {
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-}
-
-/* High DPI Screens */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  /* Ensure elements remain crisp */
-  .hotspot {
-    transform: translate(-50%, -50%) scale(0.5);
-    transform-origin: center;
-  }
-  
-  /* Adjust borders for high DPI */
-  .quest-cell,
-  .timer-cell,
-  #quest-box {
-    border-width: 1px;
-  }
-}
-
-/* Print Styles */
-@media print {
-  /* Hide interactive elements for printing */
-  #dropdown-container,
-  .profile-btn,
-  .achievements-btn,
-  .hotspot,
-  #map-container::after,
-  .tab-button,
-  .close-btn,
-  #close-quest,
-  #rationale-close,
-  #welcome-close,
-  .tour-btn,
-  #welcome-tour-container,
-  #welcome-tour-controls {
-    display: none !important;
-  }
-  
-  /* Adjust colors for printing */
-  #quest-box,
-  .quest-cell,
-  .popup,
-  #standards-table {
-    background: white !important;
-    color: black !important;
-    border: 1px solid #000 !important;
-  }
-  
-  /* Ensure text is readable */
-  * {
-    color: black !important;
-    background: white !important;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
