@@ -465,7 +465,7 @@ select:focus {
   right: 5%;      /* leave space on right */
   display: flex;
   flex-direction: column;
-  justify-content: center; /* vertically center short text */
+  justify-content: flex-start; 
   overflow-y: auto;        /* scroll if text is too long */
   padding: 10px 0;         /* inner padding inside writing area */
   box-sizing: border-box;
@@ -2029,6 +2029,7 @@ select:focus {
     background: white !important;
   }
 }
+
 
 
 
