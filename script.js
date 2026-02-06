@@ -483,6 +483,21 @@ function closeQuest() {
     mvpSel.style.display = "none";
     mvpSel.innerHTML = '<option value="">Select MVP Quest</option>';
   }
+  function closeQuest() {
+  // Stop any active timer for the current quest
+  if (currentQuestId && questTimers[currentQuestId]) {
+    stopQuestTimer(currentQuestId);
+  }
+  
+  document.getElementById("quest-overlay").style.display = "none";
+  const pathSel = document.getElementById("path-selector");
+  const mvpSel = document.getElementById("mvp-quests");
+  if (pathSel) pathSel.value = "";
+  if (mvpSel) {
+    mvpSel.style.display = "none";
+    mvpSel.innerHTML = '<option value="">Select MVP Quest</option>';
+  }
+}
 }
 
 // ==========================
@@ -3324,4 +3339,5 @@ function switchMap(mapName) {
     // Re-setup hotspot interactions for new map
     setTimeout(setupHotspotInteractions, 100);
 }
+
 
