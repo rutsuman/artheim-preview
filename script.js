@@ -3339,5 +3339,49 @@ function switchMap(mapName) {
     // Re-setup hotspot interactions for new map
     setTimeout(setupHotspotInteractions, 100);
 }
+// Add this function to fix text overflow
+function fixWelcomeScrollOverflow() {
+  const scrollBody = document.querySelector('.welcome-scroll .scroll-body');
+  if (!scrollBody) return;
+  
+  // Get the actual width of the scroll body
+  const scrollBodyWidth = scrollBody.offsetWidth;
+  const scrollBodyScrollWidth = scrollBody.scrollWidth;
+  
+  // If content is wider than container
+  if (scrollBodyScrollWidth > scrollBodyWidth) {
+    // Reduce font size slightly
+    const currentFontSize = parseFloat(getComputedStyle(scrollBody).fontSize);
+    const newFontSize = currentFontSize * 0.95;
+    scrollBody.style.fontSize = `${newFontSize}px`;
+    
+    // Check again recursively
+    setTimeout(fixWelcomeScrollOverflow, 10);
+  }
+  
+  // Also fix any individual paragraph overflow
+  const paragraphs = scrollBody.querySelectorAll('p');
+  paragraphs.forEach(p => {
+    if (p.scrollWidth > scrollBodyWidth) {
+      p.style.wordBreak = 'break-word';
+      p.style.overflowWrap = 'break-word';
+    }
+  });
+}
+
+// Call this when welcome overlay is shown
+function showWelcomeOverlay() {
+  document.getElementById("welcome-overlay").style.display = "flex";
+  
+  // Fix overflow after a short delay to ensure DOM is rendered
+  setTimeout(fixWelcomeScrollOverflow, 100);
+}
+
+// Also fix on window resize
+window.addEventListener('resize', () => {
+  if (document.getElementById("welcome-overlay").style.display === "flex") {
+    fixWelcomeScrollOverflow();
+  }
+});
 
 
