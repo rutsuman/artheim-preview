@@ -390,30 +390,28 @@ select:focus {
   background: rgba(0,0,0,0.7);
   z-index: 9999;
 }
-/* Scroll wrapper - UPDATED TO STRETCH HORIZONTALLY */
+/* Scroll wrapper - REVERTED to contain but with dynamic sizing */
 .welcome-scroll {
   position: relative;
   width: 85%;
-  max-width: 1100px; /* INCREASED from 900px to 1100px */
+  max-width: 1100px;
   height: 80vh;
-  background: url('scroll.png') center/cover no-repeat; /* CHANGED: contain to cover */
+  background: url('scroll.png') center / contain no-repeat; /* REVERTED to contain */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   will-change: transform, opacity;
-  padding: 80px 100px; /* INCREASED horizontal padding */
+  padding: 80px 100px;
   box-shadow: 0 25px 60px rgba(0,0,0,0.7);
   animation: float 5s ease-in-out infinite;
   box-sizing: border-box;
   overflow: hidden;
-  /* ADDED: Stretch horizontally on wide screens */
-  background-size: 100% 100%; /* This will stretch to fill */
 }
 /* Body content */
 .scroll-body {
   width: 100%;
-  max-width: 900px; /* INCREASED from 680px to 900px */
+  max-width: 900px;
   text-align: center;
   color: #000000;
   font-family: 'Georgia', serif;
@@ -421,7 +419,7 @@ select:focus {
   font-size: clamp(16px, 2.2vw, 20px);
   max-height: 60vh;
   overflow-y: auto;
-  padding: 0 40px; /* INCREASED padding */
+  padding: 0 40px;
   box-sizing: border-box;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -496,108 +494,209 @@ select:focus {
   height: auto;
 }
 
-/* ADDED: Special treatment for VERY wide screens */
-@media (min-width: 1600px) {
-  .welcome-scroll {
-    max-width: 1300px; /* Much wider on wide screens */
-    padding: 100px 120px;
-    /* Force horizontal stretch */
-    background-size: 100% auto;
-    min-height: 70vh;
-  }
-  
-  .scroll-body {
-    max-width: 1000px;
-    font-size: clamp(18px, 2vw, 22px);
-    padding: 0 50px;
-  }
+/* =============================================
+   NEW: FIX FOR WIDE SCREENS - SCALABLE SCROLL
+   ============================================= */
+
+/* Create a 9-slice scalable scroll using multiple background layers */
+.welcome-scroll {
+  /* Base parchment color as fallback */
+  background-color: #f5e1b0;
+  border: 6px solid #b99b63;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* ADDED: For ultrawide monitors (21:9, 32:9, etc) */
-@media (min-width: 2000px) {
-  .welcome-scroll {
-    max-width: 1600px;
-    padding: 120px 150px;
-    /* Use a different approach: stretch horizontally, maintain vertical aspect */
-    background: url('scroll.png') center/100% auto no-repeat;
-  }
-  
-  .scroll-body {
-    max-width: 1200px;
-    font-size: clamp(20px, 1.8vw, 24px);
-    padding: 0 80px;
-  }
-}
-
-/* ADDED: Dynamic horizontal stretch based on screen width */
-@media (min-width: 1360px) {
-  .welcome-scroll {
-    /* Calculate width based on viewport */
-    width: min(90%, 1400px);
-    /* Stretch background horizontally */
-    background: url('scroll.png') center / 100% 100% no-repeat;
-  }
-}
-
-/* ADDED: Alternative method using a flexible container */
-@media (min-aspect-ratio: 16/9) {
-  /* For widescreen displays (wider than 16:9) */
-  .welcome-scroll {
-    background-size: cover;
-    width: 90%;
-    max-width: 1400px;
-  }
-  
-  .scroll-body {
-    max-width: 1000px;
-  }
-}
-
-/* ADDED: Firefox-specific fix for stretching */
-@-moz-document url-prefix() {
-  .welcome-scroll {
-    background-size: 100% 100% !important;
-  }
-}
-
-/* ADDED: Ensure the scroll image repeats if needed */
-.welcome-scroll::after {
+/* Add decorative scroll effect with CSS instead of image */
+.welcome-scroll::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('scroll.png') center/cover no-repeat;
-  z-index: -1;
+  background: 
+    /* Top decorative edge */
+    linear-gradient(to bottom, 
+      rgba(185, 155, 99, 0.8) 0%,
+      rgba(185, 155, 99, 0.6) 2px,
+      rgba(185, 155, 99, 0.4) 4px,
+      transparent 10px
+    ),
+    /* Bottom decorative edge */
+    linear-gradient(to top,
+      rgba(185, 155, 99, 0.8) 0%,
+      rgba(185, 155, 99, 0.6) 2px,
+      rgba(185, 155, 99, 0.4) 4px,
+      transparent 10px
+    ),
+    /* Left decorative edge */
+    linear-gradient(to right,
+      rgba(185, 155, 99, 0.8) 0%,
+      rgba(185, 155, 99, 0.6) 2px,
+      rgba(185, 155, 99, 0.4) 4px,
+      transparent 10px
+    ),
+    /* Right decorative edge */
+    linear-gradient(to left,
+      rgba(185, 155, 99, 0.8) 0%,
+      rgba(185, 155, 99, 0.6) 2px,
+      rgba(185, 155, 99, 0.4) 4px,
+      transparent 10px
+    ),
+    /* Parchment texture */
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 25px,
+      rgba(185, 155, 99, 0.1) 25px,
+      rgba(185, 155, 99, 0.1) 26px
+    ),
+    /* Parchment base with subtle gradient */
+    radial-gradient(
+      ellipse at center,
+      rgba(245, 225, 176, 1) 0%,
+      rgba(235, 210, 160, 1) 100%
+    );
+  z-index: 1;
   pointer-events: none;
+  border-radius: 14px; /* Slightly smaller than container */
 }
 
-/* ADDED: Create a safe area that always fits within the stretched scroll */
-.scroll-body::before {
+/* Add curled corner effects */
+.welcome-scroll::after {
   content: '';
   position: absolute;
-  left: 15%;
-  right: 15%;
-  top: 15%;
-  bottom: 15%;
-  z-index: -1;
+  width: 40px;
+  height: 40px;
+  background: 
+    radial-gradient(
+      circle at 0 0,
+      transparent 40px,
+      rgba(185, 155, 99, 0.3) 40px
+    );
+  top: -6px;
+  left: -6px;
+  z-index: 2;
   pointer-events: none;
-  background: rgba(245, 225, 176, 0.05);
-  border-radius: 5px;
 }
 
-/* ADDED: If the scroll.png has transparent edges, we can force it to stretch */
+.welcome-scroll .corner-curl {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: 
+    radial-gradient(
+      circle at 100% 0,
+      transparent 40px,
+      rgba(185, 155, 99, 0.3) 40px
+    );
+  top: -6px;
+  right: -6px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.welcome-scroll .corner-curl-bottom-left {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: 
+    radial-gradient(
+      circle at 0 100%,
+      transparent 40px,
+      rgba(185, 155, 99, 0.3) 40px
+    );
+  bottom: -6px;
+  left: -6px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.welcome-scroll .corner-curl-bottom-right {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: 
+    radial-gradient(
+      circle at 100% 100%,
+      transparent 40px,
+      rgba(185, 155, 99, 0.3) 40px
+    );
+  bottom: -6px;
+  right: -6px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Ensure text is above the decorative backgrounds */
+.scroll-body {
+  position: relative;
+  z-index: 3;
+}
+
+/* Remove the old background image reference */
 .welcome-scroll {
-  /* This forces the image to stretch to fill the container */
-  background-repeat: no-repeat;
-  background-position: center;
+  background: none !important;
 }
 
-/* ADDED: Mobile and tablet adjustments */
+/* =============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================= */
+
+/* For very wide screens - adjust padding and width */
+@media (min-width: 1360px) {
+  .welcome-scroll {
+    width: min(90%, 1400px);
+    padding: 80px 120px;
+  }
+  
+  .scroll-body {
+    max-width: 1000px;
+    padding: 0 60px;
+  }
+}
+
+/* For ultrawide monitors */
+@media (min-width: 1920px) {
+  .welcome-scroll {
+    width: min(85%, 1600px);
+    padding: 100px 150px;
+  }
+  
+  .scroll-body {
+    max-width: 1200px;
+    padding: 0 80px;
+    font-size: clamp(18px, 1.8vw, 22px);
+  }
+  
+  .welcome-scroll h1 {
+    font-size: clamp(32px, 3.5vw, 48px);
+  }
+  
+  .welcome-scroll p {
+    font-size: clamp(16px, 1.6vw, 20px);
+  }
+}
+
+/* For 4K and larger displays */
+@media (min-width: 2560px) {
+  .welcome-scroll {
+    width: min(80%, 2000px);
+    padding: 120px 180px;
+  }
+  
+  .scroll-body {
+    max-width: 1500px;
+    padding: 0 100px;
+    font-size: clamp(20px, 1.6vw, 24px);
+  }
+}
+
+/* Mobile and tablet adjustments */
 @media (max-width: 768px) {
   .welcome-scroll {
-    background-size: cover; /* Use cover on mobile too */
     padding: 60px 40px;
     width: 90%;
     max-width: 600px;
@@ -607,13 +706,42 @@ select:focus {
     max-width: 90%;
     padding: 0 20px;
   }
+  
+  /* Adjust decorative edges for mobile */
+  .welcome-scroll::before {
+    background: 
+      linear-gradient(to bottom, 
+        rgba(185, 155, 99, 0.6) 0%,
+        rgba(185, 155, 99, 0.4) 1px,
+        transparent 5px
+      ),
+      linear-gradient(to top,
+        rgba(185, 155, 99, 0.6) 0%,
+        rgba(185, 155, 99, 0.4) 1px,
+        transparent 5px
+      ),
+      linear-gradient(to right,
+        rgba(185, 155, 99, 0.6) 0%,
+        rgba(185, 155, 99, 0.4) 1px,
+        transparent 5px
+      ),
+      linear-gradient(to left,
+        rgba(185, 155, 99, 0.6) 0%,
+        rgba(185, 155, 99, 0.4) 1px,
+        transparent 5px
+      ),
+      radial-gradient(
+        ellipse at center,
+        rgba(245, 225, 176, 1) 0%,
+        rgba(235, 210, 160, 1) 100%
+      );
+  }
 }
 
 @media (max-width: 480px) {
   .welcome-scroll {
     padding: 50px 30px;
     width: 95%;
-    background-size: cover;
   }
   
   .scroll-body {
@@ -630,26 +758,47 @@ select:focus {
   }
 }
 
-/* ADDED: Emergency overflow prevention - force everything to stay inside */
-.welcome-scroll * {
-  max-width: 100% !important;
-  overflow-wrap: break-word !important;
-}
+/* =============================================
+   ALTERNATIVE: IF YOU WANT TO KEEP THE IMAGE
+   ============================================= */
+/* 
+If you prefer to keep the scroll.png image but make it stretch properly,
+you'll need to edit the image file to have a "9-slice" scalable design.
+Alternatively, use this CSS to create a tiled effect:
 
-/* ADDED: If still having issues, we can use a completely different approach */
-/* Uncomment if the above doesn't work */
-/*
 .welcome-scroll {
   background: 
-    /* Left edge */
-    url('scroll-left-edge.png') left center / auto 100% no-repeat,
-    /* Right edge */ 
-    url('scroll-right-edge.png') right center / auto 100% no-repeat,
-    /* Middle repeating part */
-    url('scroll-middle.png') center / 100% 100% repeat-x;
-  background-color: #f5e1b0; /* Fallback color */
+    url('scroll-top-left.png') top left no-repeat,
+    url('scroll-top-right.png') top right no-repeat,
+    url('scroll-bottom-left.png') bottom left no-repeat,
+    url('scroll-bottom-right.png') bottom right no-repeat,
+    url('scroll-top.png') top center repeat-x,
+    url('scroll-bottom.png') bottom center repeat-x,
+    url('scroll-left.png') left center repeat-y,
+    url('scroll-right.png') right center repeat-y,
+    url('scroll-center.png') center repeat;
+  background-color: #f5e1b0;
 }
 */
+
+/* =============================================
+   FINAL OVERFLOW PROTECTION
+   ============================================= */
+
+/* Force all content to stay within bounds */
+.scroll-body > * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Add a visual boundary for debugging (can remove later) */
+.welcome-scroll.debug {
+  outline: 2px dashed red;
+}
+
+.scroll-body.debug {
+  outline: 2px dashed blue;
+}
 /* ==========================
    RUBRIC POPUP (Quest-style)
    ========================== */
@@ -2471,6 +2620,7 @@ button {
         height: -webkit-fill-available;
     }
 }
+
 
 
 
