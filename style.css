@@ -396,33 +396,38 @@ select:focus {
   max-width: 900px;
   height: 80vh;
   background: url('scroll.png') center/contain no-repeat;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   will-change: transform, opacity;
-
   padding: 80px 60px;
   box-shadow: 0 25px 60px rgba(0,0,0,0.7);
   animation: float 5s ease-in-out infinite;
+  /* ADDED: Prevent overflow */
+  box-sizing: border-box;
+  overflow: hidden;
 }
 /* Body content */
 .scroll-body {
   width: 100%;
-  max-width: 680px;
+  max-width: 620px; /* CHANGED: Reduced from 680px to 620px */
   text-align: center;
   color: #000000;
   font-family: 'Georgia', serif;
   z-index: 2;
-
-  /* AUTO FIT TEXT */
   font-size: clamp(16px, 2.2vw, 20px);
-
-  /* SCROLL IF TOO LONG */
   max-height: 60vh;
   overflow-y: auto;
-  padding-right: 10px;
+  /* CHANGED: Added left padding and box-sizing */
+  padding: 0 20px;
+  box-sizing: border-box;
+  /* ADDED: Text wrapping properties */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
 }
 /* Scrollbar styling */
 .scroll-body::-webkit-scrollbar {
@@ -430,6 +435,14 @@ select:focus {
 }
 .scroll-body::-webkit-scrollbar-thumb {
   background: rgba(125, 84, 35, 0.705);
+  border-radius: 10px;
+}
+/* ADDED: Horizontal scrollbar for edge cases */
+.scroll-body::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+.scroll-body::-webkit-scrollbar-track:horizontal {
+  background: rgba(125, 84, 35, 0.2);
   border-radius: 10px;
 }
 /* Float animation */
@@ -442,11 +455,18 @@ select:focus {
 .welcome-scroll h1 {
   font-size: clamp(26px, 4vw, 42px);
   margin-bottom: 20px;
+  /* ADDED: Ensure title doesn't overflow */
+  max-width: 100%;
+  word-break: break-word;
 }
 .welcome-scroll p {
   font-size: clamp(14px, 1.6vw, 18px);
   line-height: 1.6;
   margin-bottom: 20px;
+  /* ADDED: Ensure paragraphs don't overflow */
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 /* Button */
 #welcome-close {
@@ -456,6 +476,11 @@ select:focus {
   background: #f0d9a7;
   cursor: pointer;
   border-radius: 10px;
+  /* ADDED: Prevent button overflow */
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+  box-sizing: border-box;
 }
 /*character choosing*/
 #characters-list {
@@ -463,17 +488,126 @@ select:focus {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 15px;
+  /* ADDED: Center and contain */
+  justify-content: center;
+  max-width: 100%;
 }
 .character-card {
   cursor: pointer;
   border: 2px solid rgba(255,255,255,0.3);
   padding: 6px;
   border-radius: 12px;
+  /* ADDED: Prevent overflow */
+  max-width: 100px;
+  box-sizing: border-box;
 }
 .character-card img {
   width: 90px;
   height: 90px;
   object-fit: contain;
+  /* ADDED: Ensure image fits */
+  max-width: 100%;
+  height: auto;
+}
+
+/* ADDED: Media query for large screens (1920x1080 and above) */
+@media (min-width: 1600px) {
+  .welcome-scroll {
+    max-width: 1000px; /* Larger on big screens */
+    padding: 100px 80px;
+  }
+  
+  .scroll-body {
+    max-width: 750px; /* More width for large screens */
+    font-size: clamp(18px, 2vw, 22px);
+  }
+}
+
+/* ADDED: Media query for 4K and very large displays */
+@media (min-width: 2560px) {
+  .welcome-scroll {
+    max-width: 1200px;
+    padding: 120px 100px;
+  }
+  
+  .scroll-body {
+    max-width: 900px;
+    font-size: clamp(20px, 1.8vw, 24px);
+  }
+}
+
+/* ADDED: Media query for tablets and smaller */
+@media (max-width: 768px) {
+  .welcome-scroll {
+    padding: 60px 40px;
+    width: 90%;
+  }
+  
+  .scroll-body {
+    max-width: 90%;
+    padding: 0 15px;
+  }
+}
+
+/* ADDED: Media query for mobile */
+@media (max-width: 480px) {
+  .welcome-scroll {
+    padding: 50px 30px;
+    width: 95%;
+  }
+  
+  .scroll-body {
+    max-width: 95%;
+    padding: 0 10px;
+  }
+  
+  .welcome-scroll h1 {
+    font-size: clamp(22px, 5vw, 32px);
+  }
+  
+  .welcome-scroll p {
+    font-size: clamp(13px, 1.8vw, 16px);
+  }
+}
+
+/* ADDED: Firefox-specific fix */
+@-moz-document url-prefix() {
+  .scroll-body {
+    overflow-x: hidden;
+  }
+}
+
+/* ADDED: Force all content to stay within bounds (emergency fix) */
+.welcome-scroll .scroll-body * {
+  max-width: 100%;
+}
+
+/* ADDED: Safe text area within scroll */
+.scroll-body > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ADDED: Backdrop to ensure text stays within decorative scroll edges */
+.welcome-scroll::before {
+  content: '';
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 10%;
+  bottom: 10%;
+  z-index: 1;
+  pointer-events: none;
+  /* Optional: add a subtle gradient to fade edges */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 5%,
+    rgba(245, 225, 176, 0.1) 10%,
+    rgba(245, 225, 176, 0.1) 90%,
+    transparent 95%,
+    transparent 100%
+  );
 }
 /* ==========================
    RUBRIC POPUP (Quest-style)
@@ -2296,4 +2430,5 @@ button {
         height: -webkit-fill-available;
     }
 }
+
 
