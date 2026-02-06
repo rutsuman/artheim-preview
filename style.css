@@ -377,6 +377,7 @@ select:focus {
     }
 }
 /* WELLCOME==========================================================================================*/
+/* WELLCOME==========================================================================================*/
 .welcome-overlay {
   position: fixed;
   top: 0;
@@ -389,29 +390,30 @@ select:focus {
   background: rgba(0,0,0,0.7);
   z-index: 9999;
 }
-/* Scroll wrapper */
+/* Scroll wrapper - UPDATED TO STRETCH HORIZONTALLY */
 .welcome-scroll {
   position: relative;
   width: 85%;
-  max-width: 900px;
+  max-width: 1100px; /* INCREASED from 900px to 1100px */
   height: 80vh;
-  background: url('scroll.png') center/contain no-repeat;
+  background: url('scroll.png') center/cover no-repeat; /* CHANGED: contain to cover */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   will-change: transform, opacity;
-  padding: 80px 60px;
+  padding: 80px 100px; /* INCREASED horizontal padding */
   box-shadow: 0 25px 60px rgba(0,0,0,0.7);
   animation: float 5s ease-in-out infinite;
-  /* ADDED: Prevent overflow */
   box-sizing: border-box;
   overflow: hidden;
+  /* ADDED: Stretch horizontally on wide screens */
+  background-size: 100% 100%; /* This will stretch to fill */
 }
 /* Body content */
 .scroll-body {
   width: 100%;
-  max-width: 620px; /* CHANGED: Reduced from 680px to 620px */
+  max-width: 900px; /* INCREASED from 680px to 900px */
   text-align: center;
   color: #000000;
   font-family: 'Georgia', serif;
@@ -419,10 +421,8 @@ select:focus {
   font-size: clamp(16px, 2.2vw, 20px);
   max-height: 60vh;
   overflow-y: auto;
-  /* CHANGED: Added left padding and box-sizing */
-  padding: 0 20px;
+  padding: 0 40px; /* INCREASED padding */
   box-sizing: border-box;
-  /* ADDED: Text wrapping properties */
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
@@ -437,14 +437,6 @@ select:focus {
   background: rgba(125, 84, 35, 0.705);
   border-radius: 10px;
 }
-/* ADDED: Horizontal scrollbar for edge cases */
-.scroll-body::-webkit-scrollbar:horizontal {
-  height: 8px;
-}
-.scroll-body::-webkit-scrollbar-track:horizontal {
-  background: rgba(125, 84, 35, 0.2);
-  border-radius: 10px;
-}
 /* Float animation */
 @keyframes float {
   0% { transform: translateY(-4px); }
@@ -455,7 +447,6 @@ select:focus {
 .welcome-scroll h1 {
   font-size: clamp(26px, 4vw, 42px);
   margin-bottom: 20px;
-  /* ADDED: Ensure title doesn't overflow */
   max-width: 100%;
   word-break: break-word;
 }
@@ -463,7 +454,6 @@ select:focus {
   font-size: clamp(14px, 1.6vw, 18px);
   line-height: 1.6;
   margin-bottom: 20px;
-  /* ADDED: Ensure paragraphs don't overflow */
   max-width: 100%;
   word-break: break-word;
   overflow-wrap: break-word;
@@ -476,7 +466,6 @@ select:focus {
   background: #f0d9a7;
   cursor: pointer;
   border-radius: 10px;
-  /* ADDED: Prevent button overflow */
   max-width: 200px;
   margin: 0 auto;
   display: block;
@@ -488,7 +477,6 @@ select:focus {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 15px;
-  /* ADDED: Center and contain */
   justify-content: center;
   max-width: 100%;
 }
@@ -497,7 +485,6 @@ select:focus {
   border: 2px solid rgba(255,255,255,0.3);
   padding: 6px;
   border-radius: 12px;
-  /* ADDED: Prevent overflow */
   max-width: 100px;
   box-sizing: border-box;
 }
@@ -505,60 +492,133 @@ select:focus {
   width: 90px;
   height: 90px;
   object-fit: contain;
-  /* ADDED: Ensure image fits */
   max-width: 100%;
   height: auto;
 }
 
-/* ADDED: Media query for large screens (1920x1080 and above) */
+/* ADDED: Special treatment for VERY wide screens */
 @media (min-width: 1600px) {
   .welcome-scroll {
-    max-width: 1000px; /* Larger on big screens */
-    padding: 100px 80px;
+    max-width: 1300px; /* Much wider on wide screens */
+    padding: 100px 120px;
+    /* Force horizontal stretch */
+    background-size: 100% auto;
+    min-height: 70vh;
   }
   
   .scroll-body {
-    max-width: 750px; /* More width for large screens */
+    max-width: 1000px;
     font-size: clamp(18px, 2vw, 22px);
+    padding: 0 50px;
   }
 }
 
-/* ADDED: Media query for 4K and very large displays */
-@media (min-width: 2560px) {
+/* ADDED: For ultrawide monitors (21:9, 32:9, etc) */
+@media (min-width: 2000px) {
   .welcome-scroll {
-    max-width: 1200px;
-    padding: 120px 100px;
+    max-width: 1600px;
+    padding: 120px 150px;
+    /* Use a different approach: stretch horizontally, maintain vertical aspect */
+    background: url('scroll.png') center/100% auto no-repeat;
   }
   
   .scroll-body {
-    max-width: 900px;
+    max-width: 1200px;
     font-size: clamp(20px, 1.8vw, 24px);
+    padding: 0 80px;
   }
 }
 
-/* ADDED: Media query for tablets and smaller */
+/* ADDED: Dynamic horizontal stretch based on screen width */
+@media (min-width: 1360px) {
+  .welcome-scroll {
+    /* Calculate width based on viewport */
+    width: min(90%, 1400px);
+    /* Stretch background horizontally */
+    background: url('scroll.png') center / 100% 100% no-repeat;
+  }
+}
+
+/* ADDED: Alternative method using a flexible container */
+@media (min-aspect-ratio: 16/9) {
+  /* For widescreen displays (wider than 16:9) */
+  .welcome-scroll {
+    background-size: cover;
+    width: 90%;
+    max-width: 1400px;
+  }
+  
+  .scroll-body {
+    max-width: 1000px;
+  }
+}
+
+/* ADDED: Firefox-specific fix for stretching */
+@-moz-document url-prefix() {
+  .welcome-scroll {
+    background-size: 100% 100% !important;
+  }
+}
+
+/* ADDED: Ensure the scroll image repeats if needed */
+.welcome-scroll::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('scroll.png') center/cover no-repeat;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ADDED: Create a safe area that always fits within the stretched scroll */
+.scroll-body::before {
+  content: '';
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 15%;
+  bottom: 15%;
+  z-index: -1;
+  pointer-events: none;
+  background: rgba(245, 225, 176, 0.05);
+  border-radius: 5px;
+}
+
+/* ADDED: If the scroll.png has transparent edges, we can force it to stretch */
+.welcome-scroll {
+  /* This forces the image to stretch to fill the container */
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ADDED: Mobile and tablet adjustments */
 @media (max-width: 768px) {
   .welcome-scroll {
+    background-size: cover; /* Use cover on mobile too */
     padding: 60px 40px;
     width: 90%;
+    max-width: 600px;
   }
   
   .scroll-body {
     max-width: 90%;
-    padding: 0 15px;
+    padding: 0 20px;
   }
 }
 
-/* ADDED: Media query for mobile */
 @media (max-width: 480px) {
   .welcome-scroll {
     padding: 50px 30px;
     width: 95%;
+    background-size: cover;
   }
   
   .scroll-body {
     max-width: 95%;
-    padding: 0 10px;
+    padding: 0 15px;
   }
   
   .welcome-scroll h1 {
@@ -570,45 +630,26 @@ select:focus {
   }
 }
 
-/* ADDED: Firefox-specific fix */
-@-moz-document url-prefix() {
-  .scroll-body {
-    overflow-x: hidden;
-  }
+/* ADDED: Emergency overflow prevention - force everything to stay inside */
+.welcome-scroll * {
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
 }
 
-/* ADDED: Force all content to stay within bounds (emergency fix) */
-.welcome-scroll .scroll-body * {
-  max-width: 100%;
+/* ADDED: If still having issues, we can use a completely different approach */
+/* Uncomment if the above doesn't work */
+/*
+.welcome-scroll {
+  background: 
+    /* Left edge */
+    url('scroll-left-edge.png') left center / auto 100% no-repeat,
+    /* Right edge */ 
+    url('scroll-right-edge.png') right center / auto 100% no-repeat,
+    /* Middle repeating part */
+    url('scroll-middle.png') center / 100% 100% repeat-x;
+  background-color: #f5e1b0; /* Fallback color */
 }
-
-/* ADDED: Safe text area within scroll */
-.scroll-body > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* ADDED: Backdrop to ensure text stays within decorative scroll edges */
-.welcome-scroll::before {
-  content: '';
-  position: absolute;
-  left: 15%;
-  right: 15%;
-  top: 10%;
-  bottom: 10%;
-  z-index: 1;
-  pointer-events: none;
-  /* Optional: add a subtle gradient to fade edges */
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    transparent 5%,
-    rgba(245, 225, 176, 0.1) 10%,
-    rgba(245, 225, 176, 0.1) 90%,
-    transparent 95%,
-    transparent 100%
-  );
-}
+*/
 /* ==========================
    RUBRIC POPUP (Quest-style)
    ========================== */
@@ -2430,5 +2471,6 @@ button {
         height: -webkit-fill-available;
     }
 }
+
 
 
