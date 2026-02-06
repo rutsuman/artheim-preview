@@ -3240,3 +3240,88 @@ function adjustSearchResults() {
 
 // Call this when search input gains focus
 document.getElementById('quest-search')?.addEventListener('focus', adjustSearchResults);
+
+// Add this function to handle both mouse and touch events
+function setupHotspotInteractions() {
+    const hotspots = document.querySelectorAll('.hotspot');
+    
+    hotspots.forEach(hotspot => {
+        // Remove any existing event listeners first
+        hotspot.removeEventListener('click', handleHotspotClick);
+        hotspot.removeEventListener('touchstart', handleHotspotTouch);
+        
+        // Add click for mouse/touchpad
+        hotspot.addEventListener('click', handleHotspotClick);
+        
+        // Add touch for mobile devices
+        hotspot.addEventListener('touchstart', handleHotspotTouch);
+        
+        // Prevent context menu on long press
+        hotspot.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            return false;
+        });
+    });
+}
+
+// Update your existing hotspot click handler (if you have one)
+function handleHotspotClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const questId = this.getAttribute('data-city');
+    if (questId) {
+        showQuest(questId);
+    }
+}
+
+// Add new touch handler
+function handleHotspotTouch(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Prevent double-firing (both touch and click)
+    if (e.cancelable) {
+        e.preventDefault();
+    }
+    
+    const questId = this.getAttribute('data-city');
+    if (questId) {
+        showQuest(questId);
+        
+        // Add visual feedback for touch
+        this.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+        setTimeout(() => {
+            this.style.backgroundColor = '';
+        }, 300);
+    }
+}
+
+// Also update the map click handler if you have one
+document.getElementById('map-image')?.addEventListener('click', (e) => {
+    if (!e.target.closest('.hotspot')) {
+        // Existing map click logic
+    }
+});
+
+// Add touch event to map to close quests when tapping outside
+document.getElementById('map-image')?.addEventListener('touchend', (e) => {
+    if (!e.target.closest('.hotspot') && !e.target.closest('#quest-overlay')) {
+        // Close quest if open
+        closeQuest();
+    }
+});
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+    setupHotspotInteractions();
+    // ... your existing initialization code
+});
+
+// Re-initialize hotspots when map changes
+function switchMap(mapName) {
+    // Your existing map switching logic...
+    
+    // Re-setup hotspot interactions for new map
+    setTimeout(setupHotspotInteractions, 100);
+}
+
