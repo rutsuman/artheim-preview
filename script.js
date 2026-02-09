@@ -120,6 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
       
       // Initialize timers for accepted quests
       initializeQuestTimers();
+      initializeQuestList(); // Initialize quest list functionality
+
     })
     .catch(err => console.error("Failed to load quests.json:", err));
 
@@ -3136,3 +3138,155 @@ function loadAvailableCharacters() {
       });
     });
 }
+// ==========================
+// QUEST LIST FUNCTIONS
+// ==========================
+
+function renderQuestList(filter = 'all') {
+  const container = document.getElementById('questlist-container');
+  if (!container) return;
+  
+  container.innerHTML = '';
+  
+  if (!quests || Object.keys(quests).length === 0) {
+    container.innerHTML = '<div class="questlist-empty">Loading quests...</div>';
+    return;
+  }
+  
+  let filteredQuests = [];
+  
+  // Apply filter
+  switch(filter) {
+    case 'active':
+      filteredQuests = Object.entries(quests).filter(([id, quest]) => 
+        questAccepted[id] && quest.timer
+      );
+      break;
+      
+    case 'paintersPath':
+    case 'sketcherPath':
+    case 'watercoloursPath':
+    case '3DPath':
+      // Map filter value to actual path names in JSON
+      const pathMap = {
+        'paintersPath': 'Painter Path',
+        'sketcherPath': 'Sketcher Path', 
+        'watercoloursPath': 'Watercolor Path',
+        '3DPath': '3D Path'
+      };
+      
+      const targetPath = pathMap[filter];
+      
+      filteredQuests = Object.entries(quests).filter(([id, quest]) => {
+        if (!quest.path) return false;
+        
+        // Check if quest.path array contains the target path
+        if (Array.isArray(quest.path)) {
+          return quest.path.includes(targetPath);
+        }
+        return false;
+      });
+      break;
+      
+    default: // 'all'
+      filteredQuests = Object.entries(quests);
+  }
+  
+  // Sort by ID for consistent ordering
+  filteredQuests.sort(([idA], [idB]) => {
+    const numA = parseInt(idA.replace('quest', '')) || 0;
+    const numB = parseInt(idB.replace('quest', '')) || 0;
+    return numA - numB;
+  });
+  
+  // Update count
+  document.getElementById('questlist-count').textContent = 
+    `${filteredQuests.length} ${filter === 'all' ? 'total' : 'filtered'} quest${filteredQuests.length !== 1 ? 's' : ''}`;
+  
+  if (filteredQuests.length === 0) {
+    container.innerHTML = '<div class="questlist-empty">No quests match your filter</div>';
+    return;
+  }
+  
+  // Render each quest (keep the rest of your existing rendering code)
+  filteredQuests.forEach(([id, quest]) => {
+    const isActive = questAccepted[id] && quest.timer;
+    const isCompleted = completedQuests[id];
+    
+    const questElement = document.createElement('div');
+    questElement.className = `questlist-item ${isActive ? 'active' : ''}`;
+    questElement.dataset.questId = id;
+    
+    // Format timer display
+    let timerDisplay = '';
+    if (quest.timer) {
+      const allottedMinutes = quest.timer.allottedMinutes || 0;
+      const classes = Math.round(allottedMinutes / 75);
+      timerDisplay = `${allottedMinutes} min (${classes} class${classes !== 1 ? 'es' : ''})`;
+    }
+    
+    // Get path display
+    let pathDisplay = 'No path assigned';
+    if (quest.path && Array.isArray(quest.path)) {
+      pathDisplay = quest.path.join(', ');
+    }
+    
+    questElement.innerHTML = `
+      <div class="questlist-header">
+        <h3 class="questlist-title">${quest.title || 'Untitled Quest'}</h3>
+        <span class="questlist-id">${id}</span>
+      </div>
+      <div class="questlist-details">
+        <div>
+          <span class="questlist-path">${pathDisplay}</span>
+          ${quest.timer ? `<span class="questlist-timer ${isActive ? 'active' : ''}">⏱ ${timerDisplay}</span>` : ''}
+        </div>
+        <div>
+          ${isCompleted ? '<span class="questlist-completed">✓ Completed</span>' : ''}
+          ${isActive ? '<span class="questlist-timer active">🔴 Active</span>' : ''}
+        </div>
+      </div>
+    `;
+    
+    // Add click event
+    questElement.addEventListener('click', () => {
+      document.getElementById('achievements-overlay').style.display = 'none';
+      openQuest(id);
+    });
+    
+    container.appendChild(questElement);
+  });
+}
+// Initialize quest list functionality
+function initializeQuestList() {
+  const filterSelect = document.getElementById('questlist-filter');
+  if (filterSelect) {
+    filterSelect.addEventListener('change', (e) => {
+      renderQuestList(e.target.value);
+    });
+  }
+  
+  // No additional event listener needed - tab switching is handled elsewhere
+}
+
+// Tab switching logic (this is already in your code, just ensure it has the questlist logic)
+document.querySelectorAll(".achievements-tabs .tab-button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    document.querySelectorAll(".tab-content").forEach(tab => tab.style.display = "none");
+    document.getElementById("tab-" + btn.dataset.tab).style.display = "block";
+    
+    // Only render if it's the questlist tab AND if it hasn't been rendered yet
+    if (btn.dataset.tab === "questlist") {
+      const container = document.getElementById('questlist-container');
+      // Check if container is empty before rendering
+      if (!container || container.innerHTML.trim() === '') {
+        renderQuestList(document.getElementById("questlist-filter").value);
+      }
+    }
+  });
+});
+
+
