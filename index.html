@@ -292,6 +292,7 @@
     <div class="achievements-tabs">
       <button class="tab-button active" data-tab="completed">Completed Quests</button>
       <button class="tab-button" data-tab="achievements">Achievements</button>
+      <button class="tab-button" data-tab="questlist">Quest List</button>
     </div>
 
     <div class="tab-content" id="tab-completed">
@@ -300,6 +301,29 @@
 
     <div class="tab-content" id="tab-achievements" style="display:none;">
       <div id="achievements-list"></div>
+    <div class="tab-content" id="tab-questlist" style="display:none;">
+      <!-- Filter Controls -->
+      <div class="questlist-filters">
+        <div class="filter-group">
+          <label>Filter by:</label>
+          <select id="questlist-filter">
+            <option value="all">All Quests</option>
+            <option value="active">Active Quests (with timer)</option>
+            <option value="paintersPath">Painting Path</option>
+            <option value="sketcherPath">Sketching Path</option>
+            <option value="watercoloursPath">Watercolor Path</option>
+            <option value="3DPath">3D Path</option>
+          </select>
+        </div>
+        <div class="filter-stats">
+          <span id="questlist-count">0 quests</span>
+        </div>
+      </div>
+      
+      <!-- Quest List Container -->
+      <div id="questlist-container" class="questlist-container">
+        <!-- Quests will be dynamically populated here -->
+      </div>
     </div>
   </div>
 </div>
@@ -438,3 +462,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+
