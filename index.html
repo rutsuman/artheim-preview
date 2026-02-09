@@ -5,7 +5,7 @@
     <title>Quest Map</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="favicon.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -149,6 +149,7 @@
         <!-- Second row: Quest title -->
         <div class="quest-row">
             <div class="quest-cell full">
+              <strong>Title</strong>
                 <h2 id="quest-title"></h2>
                 
             </div>
@@ -291,7 +292,6 @@
     <div class="achievements-tabs">
       <button class="tab-button active" data-tab="completed">Completed Quests</button>
       <button class="tab-button" data-tab="achievements">Achievements</button>
-      <button class="tab-button" data-tab="questlist">Quest List</button>
     </div>
 
     <div class="tab-content" id="tab-completed">
@@ -300,30 +300,6 @@
 
     <div class="tab-content" id="tab-achievements" style="display:none;">
       <div id="achievements-list"></div>
-    </div>
-    <div class="tab-content" id="tab-questlist" style="display:none;">
-      <!-- Filter Controls -->
-      <div class="questlist-filters">
-        <div class="filter-group">
-          <label>Filter by:</label>
-          <select id="questlist-filter">
-            <option value="all">All Quests</option>
-            <option value="active">Active Quests (with timer)</option>
-            <option value="paintersPath">Painting Path</option>
-            <option value="sketcherPath">Sketching Path</option>
-            <option value="watercoloursPath">Watercolor Path</option>
-            <option value="3DPath">3D Path</option>
-          </select>
-        </div>
-        <div class="filter-stats">
-          <span id="questlist-count">0 quests</span>
-        </div>
-      </div>
-      
-      <!-- Quest List Container -->
-      <div id="questlist-container" class="questlist-container">
-        <!-- Quests will be dynamically populated here -->
-      </div>
     </div>
   </div>
 </div>
