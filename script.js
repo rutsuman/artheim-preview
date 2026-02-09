@@ -120,8 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
       
       // Initialize timers for accepted quests
       initializeQuestTimers();
-      initializeQuestList(); // Initialize quest list functionality
-
+       initializeQuestList(); // Initialize quest list functionality
+    
     })
     .catch(err => console.error("Failed to load quests.json:", err));
 
@@ -883,6 +883,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       document.querySelectorAll(".tab-content").forEach(tab => tab.style.display = "none");
       document.getElementById("tab-" + btn.dataset.tab).style.display = "block";
+
+      if (btn.dataset.tab === "questlist") {
+      renderQuestList(document.getElementById("questlist-filter").value);
+      }
     });
   });
 
@@ -3288,5 +3292,3 @@ document.querySelectorAll(".achievements-tabs .tab-button").forEach(btn => {
     }
   });
 });
-
-
